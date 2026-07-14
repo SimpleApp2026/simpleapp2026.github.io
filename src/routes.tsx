@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './layout/AppShell'
 import { Placeholder } from './screens/Placeholder'
+import { Home } from './app/Home'
 import { Splash } from './onboarding/Splash'
 import { Identificacion } from './onboarding/Identificacion'
 import { RegistroDatos } from './onboarding/RegistroDatos'
@@ -21,7 +22,7 @@ export function AppRoutes() {
       <Route path="/registro/foto/lista" element={<FotoLista />} />
       <Route path="/app" element={<AppShell />}>
         <Route index element={<Navigate to="home" replace />} />
-        <Route path="home" element={<Placeholder title="Inicio" />} />
+        <Route path="home" element={<Home />} />
         <Route path="perfil" element={<Placeholder title="Perfil" />} />
         <Route path="config" element={<Placeholder title="Configuración" />} />
         <Route path="foro" element={<Placeholder title="Comunidad" />} />
