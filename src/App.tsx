@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { UserProvider } from './state/UserProvider'
 import { AccessibilityProvider } from './state/AccessibilityProvider'
@@ -14,7 +14,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
 export default function App() {
   return (
     <AppProviders>
-      <BrowserRouter><AppRoutes /></BrowserRouter>
+      <HashRouter><AppRoutes /></HashRouter>
     </AppProviders>
   )
 }
