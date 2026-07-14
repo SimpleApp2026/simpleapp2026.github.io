@@ -3,6 +3,7 @@ import { AppShell } from './layout/AppShell'
 import { Placeholder } from './screens/Placeholder'
 import { Home } from './app/Home'
 import { Perfil } from './app/Perfil'
+import { Configuracion } from './app/Configuracion'
 import { Splash } from './onboarding/Splash'
 import { Identificacion } from './onboarding/Identificacion'
 import { RegistroDatos } from './onboarding/RegistroDatos'
@@ -25,7 +26,7 @@ export function AppRoutes() {
         <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Home />} />
         <Route path="perfil" element={<Perfil />} />
-        <Route path="config" element={<Placeholder title="Configuración" />} />
+        <Route path="config" element={<Configuracion />} />
         <Route path="foro" element={<Placeholder title="Comunidad" />} />
         <Route path="asistente" element={<Placeholder title="Asistente" />} />
         <Route path="mapa" element={<Placeholder title="Mapa" />} />
@@ -33,6 +34,8 @@ export function AppRoutes() {
         <Route path="empleo" element={<Placeholder title="Empleo" />} />
         <Route path="descuentos" element={<Placeholder title="Descuentos" />} />
         <Route path="clubes" element={<Placeholder title="Clubes" />} />
+        <Route path="ayuda" element={<Placeholder title="Ayuda" />} />
+        <Route path="legal/:doc" element={<Placeholder title="Información" />} />
       </Route>
     </Routes>
   )
