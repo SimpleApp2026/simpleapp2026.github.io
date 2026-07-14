@@ -11,6 +11,10 @@ import { RegistroIntereses } from './onboarding/RegistroIntereses'
 import { FotoPreguntar } from './onboarding/FotoPreguntar'
 import { FotoCargar } from './onboarding/FotoCargar'
 import { FotoLista } from './onboarding/FotoLista'
+import { ActividadesCategorias } from './app/actividades/ActividadesCategorias'
+import { ActividadCategoria } from './app/actividades/ActividadCategoria'
+import { ActividadDetalle } from './app/actividades/ActividadDetalle'
+import { ActividadConfirmacion } from './app/actividades/ActividadConfirmacion'
 
 export function AppRoutes() {
   return (
@@ -30,7 +34,12 @@ export function AppRoutes() {
         <Route path="foro" element={<Placeholder title="Comunidad" />} />
         <Route path="asistente" element={<Placeholder title="Asistente" />} />
         <Route path="mapa" element={<Placeholder title="Mapa" />} />
-        <Route path="actividades" element={<Placeholder title="Actividades" />} />
+        <Route path="actividades">
+          <Route index element={<ActividadesCategorias />} />
+          <Route path="confirmada" element={<ActividadConfirmacion />} />
+          <Route path=":cat" element={<ActividadCategoria />} />
+          <Route path=":cat/:id" element={<ActividadDetalle />} />
+        </Route>
         <Route path="empleo" element={<Placeholder title="Empleo" />} />
         <Route path="descuentos" element={<Placeholder title="Descuentos" />} />
         <Route path="clubes" element={<Placeholder title="Clubes" />} />
