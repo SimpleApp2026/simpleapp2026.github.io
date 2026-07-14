@@ -22,6 +22,15 @@ import { Oportunidades } from './app/empleo/Oportunidades'
 import { Postular } from './app/empleo/Postular'
 import { PostulacionConfirmada } from './app/empleo/PostulacionConfirmada'
 import { Capacitaciones } from './app/empleo/Capacitaciones'
+import { ForoLayout } from './app/foro/ForoLayout'
+import { CartasPublicas } from './app/foro/CartasPublicas'
+import { CartasPrivadas } from './app/foro/CartasPrivadas'
+import { Amigos } from './app/foro/Amigos'
+import { CartaPublica } from './app/foro/CartaPublica'
+import { EscribirCarta } from './app/foro/EscribirCarta'
+import { CartaEnviada } from './app/foro/CartaEnviada'
+import { CartaPrivada } from './app/foro/CartaPrivada'
+import { Responder } from './app/foro/Responder'
 
 export function AppRoutes() {
   return (
@@ -38,7 +47,16 @@ export function AppRoutes() {
         <Route path="home" element={<Home />} />
         <Route path="perfil" element={<Perfil />} />
         <Route path="config" element={<Configuracion />} />
-        <Route path="foro" element={<Placeholder title="Comunidad" />} />
+        <Route path="foro" element={<ForoLayout />}>
+          <Route index element={<CartasPublicas />} />
+          <Route path="privadas" element={<CartasPrivadas />} />
+          <Route path="amigos" element={<Amigos />} />
+        </Route>
+        <Route path="foro/carta/:id" element={<CartaPublica />} />
+        <Route path="foro/escribir" element={<EscribirCarta />} />
+        <Route path="foro/enviada" element={<CartaEnviada />} />
+        <Route path="foro/privada/:id" element={<CartaPrivada />} />
+        <Route path="foro/privada/:id/responder" element={<Responder />} />
         <Route path="asistente" element={<Placeholder title="Asistente" />} />
         <Route path="mapa" element={<Placeholder title="Mapa" />} />
         <Route path="actividades">
