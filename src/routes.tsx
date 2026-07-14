@@ -31,6 +31,8 @@ import { EscribirCarta } from './app/foro/EscribirCarta'
 import { CartaEnviada } from './app/foro/CartaEnviada'
 import { CartaPrivada } from './app/foro/CartaPrivada'
 import { Responder } from './app/foro/Responder'
+import { ClubesList } from './app/clubes/ClubesList'
+import { ClubBoard } from './app/clubes/ClubBoard'
 
 export function AppRoutes() {
   return (
@@ -75,7 +77,8 @@ export function AppRoutes() {
           <Route path="capacitaciones" element={<Capacitaciones />} />
         </Route>
         <Route path="descuentos" element={<Placeholder title="Descuentos" />} />
-        <Route path="clubes" element={<Placeholder title="Clubes" />} />
+        <Route path="clubes" element={<ClubesList />} />
+        <Route path="clubes/:id" element={<ClubBoard />} />
         <Route path="ayuda" element={<Placeholder title="Ayuda" />} />
         <Route path="legal/:doc" element={<Placeholder title="Información" />} />
       </Route>
