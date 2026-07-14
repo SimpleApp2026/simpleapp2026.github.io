@@ -15,6 +15,13 @@ import { ActividadesCategorias } from './app/actividades/ActividadesCategorias'
 import { ActividadCategoria } from './app/actividades/ActividadCategoria'
 import { ActividadDetalle } from './app/actividades/ActividadDetalle'
 import { ActividadConfirmacion } from './app/actividades/ActividadConfirmacion'
+import { EmpleoMenu } from './app/empleo/EmpleoMenu'
+import { CvBuilder } from './app/empleo/CvBuilder'
+import { CvPreliminar } from './app/empleo/CvPreliminar'
+import { Oportunidades } from './app/empleo/Oportunidades'
+import { Postular } from './app/empleo/Postular'
+import { PostulacionConfirmada } from './app/empleo/PostulacionConfirmada'
+import { Capacitaciones } from './app/empleo/Capacitaciones'
 
 export function AppRoutes() {
   return (
@@ -40,7 +47,15 @@ export function AppRoutes() {
           <Route path=":cat" element={<ActividadCategoria />} />
           <Route path=":cat/:id" element={<ActividadDetalle />} />
         </Route>
-        <Route path="empleo" element={<Placeholder title="Empleo" />} />
+        <Route path="empleo">
+          <Route index element={<EmpleoMenu />} />
+          <Route path="experiencia" element={<CvBuilder />} />
+          <Route path="cv" element={<CvPreliminar />} />
+          <Route path="oportunidades" element={<Oportunidades />} />
+          <Route path="oportunidades/:id" element={<Postular />} />
+          <Route path="postulado" element={<PostulacionConfirmada />} />
+          <Route path="capacitaciones" element={<Capacitaciones />} />
+        </Route>
         <Route path="descuentos" element={<Placeholder title="Descuentos" />} />
         <Route path="clubes" element={<Placeholder title="Clubes" />} />
         <Route path="ayuda" element={<Placeholder title="Ayuda" />} />
