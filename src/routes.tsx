@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './layout/AppShell'
 import { Placeholder } from './screens/Placeholder'
 import { Home } from './app/Home'
+import { Perfil } from './app/Perfil'
 import { Splash } from './onboarding/Splash'
 import { Identificacion } from './onboarding/Identificacion'
 import { RegistroDatos } from './onboarding/RegistroDatos'
@@ -23,7 +24,7 @@ export function AppRoutes() {
       <Route path="/app" element={<AppShell />}>
         <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Home />} />
-        <Route path="perfil" element={<Placeholder title="Perfil" />} />
+        <Route path="perfil" element={<Perfil />} />
         <Route path="config" element={<Placeholder title="Configuración" />} />
         <Route path="foro" element={<Placeholder title="Comunidad" />} />
         <Route path="asistente" element={<Placeholder title="Asistente" />} />
