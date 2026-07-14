@@ -1,12 +1,23 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
+import { Card } from '../../ui/Card'
+import { Button } from '../../ui/Button'
 
 export function CartaEnviada() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const destino = (location.state as { destino?: string } | null)?.destino
   return (
-    <>
-      <ScreenHeader title="Carta enviada" onBack={() => navigate(-1)} />
-      <div className="p-6 text-lg text-ink/70">Carta enviada — Próximamente</div>
-    </>
+    <div>
+      <ScreenHeader title="Foro" />
+      <div className="p-6 flex flex-col items-center gap-6 text-center">
+        <div className="text-6xl" aria-hidden="true">💌</div>
+        <Card className="w-full flex flex-col gap-2">
+          <h1 className="text-2xl font-bold">¡Felicitaciones!</h1>
+          <p className="text-lg">Tu carta fue enviada a {destino ?? 'destino'}.</p>
+        </Card>
+        <Button onClick={() => navigate('/app/foro')}>Volver al Foro</Button>
+      </div>
+    </div>
   )
 }
