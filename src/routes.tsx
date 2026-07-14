@@ -1,11 +1,24 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './layout/AppShell'
 import { Placeholder } from './screens/Placeholder'
+import { Splash } from './onboarding/Splash'
+import { Identificacion } from './onboarding/Identificacion'
+import { RegistroDatos } from './onboarding/RegistroDatos'
+import { RegistroIntereses } from './onboarding/RegistroIntereses'
+import { FotoPreguntar } from './onboarding/FotoPreguntar'
+import { FotoCargar } from './onboarding/FotoCargar'
+import { FotoLista } from './onboarding/FotoLista'
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Placeholder title="Inicio" />} />
+      <Route path="/" element={<Splash />} />
+      <Route path="/identificacion" element={<Identificacion />} />
+      <Route path="/registro/datos" element={<RegistroDatos />} />
+      <Route path="/registro/intereses" element={<RegistroIntereses />} />
+      <Route path="/registro/foto" element={<FotoPreguntar />} />
+      <Route path="/registro/foto/cargar" element={<FotoCargar />} />
+      <Route path="/registro/foto/lista" element={<FotoLista />} />
       <Route path="/app" element={<AppShell />}>
         <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Placeholder title="Inicio" />} />
