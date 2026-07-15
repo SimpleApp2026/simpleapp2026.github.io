@@ -8,6 +8,7 @@ export function CartasPublicas() {
   return (
     <div className="p-4 flex flex-col gap-4">
       <Button onClick={() => navigate('/app/foro/escribir')}>Escribir carta</Button>
+      <Button variant="ghost" onClick={() => navigate('/app/clubes')}>Clubes de la comunidad</Button>
       {CARTAS_PUBLICAS.map((c) => (
         <button key={c.id} className="text-left" onClick={() => navigate(`/app/foro/carta/${c.id}`)}>
           <Postcard autor={c.autor} fecha={c.fecha}>
