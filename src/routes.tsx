@@ -31,6 +31,9 @@ import { EscribirCarta } from './app/foro/EscribirCarta'
 import { CartaEnviada } from './app/foro/CartaEnviada'
 import { CartaPrivada } from './app/foro/CartaPrivada'
 import { Responder } from './app/foro/Responder'
+import { DescuentosList } from './app/descuentos/DescuentosList'
+import { DescuentoDetalle } from './app/descuentos/DescuentoDetalle'
+import { DescuentoConfirmado } from './app/descuentos/DescuentoConfirmado'
 import { ClubesList } from './app/clubes/ClubesList'
 import { ClubBoard } from './app/clubes/ClubBoard'
 import { ChatARIEL } from './app/asistente/ChatARIEL'
@@ -79,7 +82,9 @@ export function AppRoutes() {
           <Route path="postulado" element={<PostulacionConfirmada />} />
           <Route path="capacitaciones" element={<Capacitaciones />} />
         </Route>
-        <Route path="descuentos" element={<Placeholder title="Descuentos" />} />
+        <Route path="descuentos" element={<DescuentosList />} />
+        <Route path="descuentos/confirmado" element={<DescuentoConfirmado />} />
+        <Route path="descuentos/:id" element={<DescuentoDetalle />} />
         <Route path="clubes" element={<ClubesList />} />
         <Route path="clubes/:id" element={<ClubBoard />} />
         <Route path="ayuda" element={<Ayuda />} />
