@@ -33,6 +33,7 @@ import { CartaPrivada } from './app/foro/CartaPrivada'
 import { Responder } from './app/foro/Responder'
 import { ClubesList } from './app/clubes/ClubesList'
 import { ClubBoard } from './app/clubes/ClubBoard'
+import { ChatARIEL } from './app/asistente/ChatARIEL'
 
 export function AppRoutes() {
   return (
@@ -59,7 +60,7 @@ export function AppRoutes() {
         <Route path="foro/enviada" element={<CartaEnviada />} />
         <Route path="foro/privada/:id" element={<CartaPrivada />} />
         <Route path="foro/privada/:id/responder" element={<Responder />} />
-        <Route path="asistente" element={<Placeholder title="Asistente" />} />
+        <Route path="asistente" element={<ChatARIEL />} />
         <Route path="mapa" element={<Placeholder title="Mapa" />} />
         <Route path="actividades">
           <Route index element={<ActividadesCategorias />} />
