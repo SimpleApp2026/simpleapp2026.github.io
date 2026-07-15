@@ -56,6 +56,7 @@ export function ChatARIEL() {
       <form className="p-3 flex items-center gap-2 border-t border-chip/20"
         onSubmit={(e) => { e.preventDefault(); enviar(texto) }}>
         <input value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Escribí acá..."
+          aria-label="Escribí un mensaje para ARIEL"
           className="flex-1 rounded-full border border-chip/40 px-4 py-2 text-base" />
         <button type="submit" aria-label="Enviar"
           className="h-11 w-11 grid place-items-center rounded-full bg-primary text-white">
