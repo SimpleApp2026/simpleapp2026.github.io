@@ -34,6 +34,7 @@ import { Responder } from './app/foro/Responder'
 import { ClubesList } from './app/clubes/ClubesList'
 import { ClubBoard } from './app/clubes/ClubBoard'
 import { ChatARIEL } from './app/asistente/ChatARIEL'
+import { LegalDoc } from './app/info/LegalDoc'
 
 export function AppRoutes() {
   return (
@@ -81,7 +82,7 @@ export function AppRoutes() {
         <Route path="clubes" element={<ClubesList />} />
         <Route path="clubes/:id" element={<ClubBoard />} />
         <Route path="ayuda" element={<Placeholder title="Ayuda" />} />
-        <Route path="legal/:doc" element={<Placeholder title="Información" />} />
+        <Route path="legal/:doc" element={<LegalDoc />} />
       </Route>
     </Routes>
   )
