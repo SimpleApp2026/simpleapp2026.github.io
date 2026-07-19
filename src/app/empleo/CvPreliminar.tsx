@@ -4,6 +4,7 @@ import { Card } from '../../ui/Card'
 import { Chip } from '../../ui/Chip'
 import { Button } from '../../ui/Button'
 import { useUser } from '../../state/hooks'
+import { avatarDe } from '../../data/avatars'
 
 const HABILIDADES = ['Paquete Office', 'Responsable', 'Empática', 'Paciente']
 
@@ -20,9 +21,15 @@ export function CvPreliminar() {
     <div>
       <ScreenHeader title="CV" onBack={() => navigate('/app/empleo/experiencia')} />
       <div className="p-4 flex flex-col gap-4">
-        <Card className="bg-teal/10">
-          <h1 className="text-2xl font-bold">{nombre}</h1>
-          <p className="text-ink/70">Profesora de Inglés</p>
+        <Card className="bg-teal/10 flex items-center gap-4">
+          <div>
+            <h1 className="text-2xl font-bold">{nombre}</h1>
+            <p className="text-ink/70">Profesora de Inglés</p>
+          </div>
+          {(profile?.fotoDataUrl ?? avatarDe(nombre)) && (
+            <img src={profile?.fotoDataUrl ?? avatarDe(nombre)} alt=""
+              className="ml-auto h-16 w-16 rounded-full object-cover" aria-hidden="true" />
+          )}
         </Card>
         <Card>
           <h2 className="font-semibold mb-1">Sobre mi</h2>

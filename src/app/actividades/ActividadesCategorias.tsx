@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { Card } from '../../ui/Card'
 import { CATEGORIAS } from '../../data/actividades'
+import { BADGES } from './badges'
 
 export function ActividadesCategorias() {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ export function ActividadesCategorias() {
         {CATEGORIAS.map((c) => (
           <button key={c.key} className="text-left" onClick={() => navigate(`/app/actividades/${c.key}`)}>
             <Card className="flex items-center gap-4">
-              <span className="text-3xl" aria-hidden="true">{c.emoji}</span>
+              <img src={BADGES[c.key]} alt="" className="h-14 w-14 object-contain" aria-hidden="true" />
               <span className="text-lg font-semibold">{c.titulo}</span>
             </Card>
           </button>

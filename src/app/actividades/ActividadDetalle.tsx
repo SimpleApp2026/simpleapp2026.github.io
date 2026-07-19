@@ -3,6 +3,7 @@ import { ScreenHeader } from '../../layout/ScreenHeader'
 import { Card } from '../../ui/Card'
 import { Button } from '../../ui/Button'
 import { getActividad, getCategoria } from '../../data/actividades'
+import { BADGES } from './badges'
 
 export function ActividadDetalle() {
   const navigate = useNavigate()
@@ -26,8 +27,10 @@ export function ActividadDetalle() {
     <div>
       <ScreenHeader title={categoria?.titulo ?? 'Actividad'} onBack={() => navigate(`/app/actividades/${cat}`)} />
       <div className="p-4 flex flex-col gap-4">
-        <div className="h-40 rounded-2xl bg-teal/20 grid place-items-center text-5xl" aria-hidden="true">
-          {categoria?.emoji ?? '📅'}
+        <div className="h-40 rounded-2xl bg-teal/20 grid place-items-center" aria-hidden="true">
+          {categoria
+            ? <img src={BADGES[categoria.key]} alt="" className="h-32 w-32 object-contain" />
+            : <span className="text-5xl">📅</span>}
         </div>
         <h1 className="text-2xl font-bold">{actividad.titulo}</h1>
         {actividad.descripcion && <p className="text-ink/70">{actividad.descripcion}</p>}

@@ -6,6 +6,7 @@ import { Button } from '../../ui/Button'
 import { TextField } from '../../ui/TextField'
 import { Postcard } from './Postcard'
 import { getCartaPublica, type Comentario } from '../../data/foro'
+import { avatarDe } from '../../data/avatars'
 
 export function CartaPublica() {
   const navigate = useNavigate()
@@ -36,12 +37,20 @@ export function CartaPublica() {
         <Postcard autor={carta.autor} fecha={carta.fecha}>{carta.texto}</Postcard>
         <h2 className="text-lg font-semibold">{comentarios.length} comentarios</h2>
         <div className="flex flex-col gap-2">
-          {comentarios.map((c) => (
-            <Card key={c.id} className="flex flex-col">
-              <span className="font-semibold">{c.autor}</span>
-              <span className="text-ink/80">{c.texto}</span>
-            </Card>
-          ))}
+          {comentarios.map((c) => {
+            const foto = avatarDe(c.autor)
+            return (
+              <Card key={c.id} className="flex items-start gap-3">
+                {foto
+                  ? <img src={foto} alt="" className="h-9 w-9 rounded-full object-cover shrink-0" aria-hidden="true" />
+                  : <span className="h-9 w-9 rounded-full bg-chip/20 grid place-items-center shrink-0" aria-hidden="true">👤</span>}
+                <span className="flex flex-col">
+                  <span className="font-semibold">{c.autor}</span>
+                  <span className="text-ink/80">{c.texto}</span>
+                </span>
+              </Card>
+            )
+          })}
         </div>
         <TextField label="Escribí un comentario" value={texto} onChange={setTexto} placeholder="Comentá acá..." />
         <Button onClick={comentar}>Comentar</Button>

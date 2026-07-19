@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Card } from '../../ui/Card'
 import { CONVERSACIONES, getCartaPrivada } from '../../data/foro'
+import { avatarDe } from '../../data/avatars'
 
 export function Amigos() {
   const navigate = useNavigate()
@@ -16,7 +17,9 @@ export function Amigos() {
           }}
         >
           <Card className="flex items-center gap-3">
-            <span className="h-12 w-12 rounded-full bg-chip/20 grid place-items-center text-2xl" aria-hidden="true">👤</span>
+            {avatarDe(c.amigo)
+              ? <img src={avatarDe(c.amigo)} alt="" className="h-12 w-12 rounded-full object-cover" aria-hidden="true" />
+              : <span className="h-12 w-12 rounded-full bg-chip/20 grid place-items-center text-2xl" aria-hidden="true">👤</span>}
             <span className="flex-1">
               <span className="block font-semibold">{c.amigo}</span>
               <span className="block text-ink/60 text-sm line-clamp-1">{c.ultimo}</span>

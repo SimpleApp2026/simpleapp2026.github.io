@@ -1,8 +1,9 @@
 import { CLUBES, getClub } from './clubes'
 
-test('has five clubs with unique ids and posts', () => {
-  expect(CLUBES).toHaveLength(5)
-  expect(new Set(CLUBES.map((c) => c.id)).size).toBe(5)
+test('has seven clubs with unique ids and posts', () => {
+  // 5 clubs de los frames del Figma + chisme y música (estampillas de "Clubes iconos")
+  expect(CLUBES).toHaveLength(7)
+  expect(new Set(CLUBES.map((c) => c.id)).size).toBe(7)
   expect(CLUBES.every((c) => c.posts.length > 0)).toBe(true)
 })
 
