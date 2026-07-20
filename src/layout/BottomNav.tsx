@@ -8,7 +8,11 @@ export function BottomNav() {
   const { profile } = useUser()
   const fotoPerfil = profile?.fotoDataUrl ?? avatarDe(profile?.nombre)
   return (
-    <nav className="bg-navy-900 text-white flex justify-around items-center py-2">
+    // shrink-0 para que nunca lo comprima el contenido; el padding extra respeta
+    // la barra de gestos de los teléfonos con pantalla completa.
+    <nav
+      className="shrink-0 bg-navy-900 text-white flex justify-around items-center py-2"
+      style={{ paddingBottom: 'calc(0.5rem + env(safe-area-inset-bottom))' }}>
       <NavLink to="/app/home"
         className={({ isActive }) => `flex flex-col items-center text-xs px-2 ${isActive ? 'text-teal' : 'text-white/80'}`}>
         <HomeIcon className="h-6 w-6" />

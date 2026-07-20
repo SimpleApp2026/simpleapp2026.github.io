@@ -7,7 +7,7 @@ export function OnboardingScreen(
 ) {
   return (
     <PhoneFrame>
-      <div className={`flex-1 overflow-y-auto ${className}`}>{children}</div>
+      <div className={`flex-1 min-h-0 overflow-y-auto ${className}`}>{children}</div>
       {footer && (
         <div className="bg-navy-900 text-white text-center px-6 pt-8 pb-6 rounded-t-[3rem] text-lg font-medium">
           {footer}

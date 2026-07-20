@@ -10,7 +10,7 @@ export function Identificacion() {
   const anonimo = () => { setIdentified(false); navigate('/app/home') }
   return (
     <PhoneFrame>
-      <div className="flex-1 bg-navy-900 text-white flex flex-col justify-center items-center gap-6 px-8 text-center">
+      <div className="flex-1 min-h-0 overflow-y-auto bg-navy-900 text-white flex flex-col justify-center items-center gap-6 px-8 text-center">
         {/* Avatar genérico gris del frame 02 del Figma: ocupa la mitad del ancho
             de la pantalla y la silueta va inscrita en el círculo (el arco de los
             hombros se recorta contra el borde, como en el diseño). */}
