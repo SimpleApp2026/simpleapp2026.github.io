@@ -45,9 +45,24 @@ export const CLUBES: Club[] = [
       { id: 'c2', autor: 'Sergio', texto: 'Yo iré con un viejo amigo que vino de visita' },
     ] },
   ] },
+  { id: 'viajes', titulo: 'Club de viajes', emoji: '✈️', descripcion: 'Destinos, recuerdos y recomendaciones.', posts: [
+    { id: 'p1', autor: 'Marta', texto: 'Siempre es tan lindo ir a la Patagonia. Viaje recomendado siempre!', comentarios: [
+      { id: 'c1', autor: 'Norma', texto: 'Nosotros fuimos en primavera y no queríamos volver.' },
+    ] },
+    { id: 'p2', autor: 'Oscar', texto: 'Vuelvo con mi señora de tomarnos otra foto en la Unidad Postal de Fin del Mundo. Mañana nos vamos a navegar por el canal Beagle.', comentarios: [
+      { id: 'c1', autor: 'Elena', texto: '¡Qué viaje soñado! Después contanos cómo estuvo el Beagle.' },
+      { id: 'c2', autor: 'Roberto', texto: 'Esa foto la tengo yo también, de hace veinte años.' },
+    ] },
+    { id: 'p3', autor: 'Haydee', texto: 'Estoy armando una escapada corta a las sierras de Córdoba. ¿Alguien conoce un hospedaje tranquilo?', comentarios: [
+      { id: 'c1', autor: 'Susana', texto: 'En La Cumbrecita se camina precioso y se descansa de verdad.' },
+    ] },
+  ] },
   { id: 'manualidades', titulo: 'Club de manualidades', emoji: '🎨', descripcion: 'Ideas, tips y proyectos hechos a mano.', posts: [
-    { id: 'p1', autor: 'Elena', texto: 'Quería recomendar la tienda del barrio para comprar lanas a buen precio.', comentarios: [
-      { id: 'c1', autor: 'Norma', texto: '¡Gracias por el dato! Justo necesitaba lana para la mantita.' },
+    { id: 'p1', autor: 'Elena', texto: '¿Alguien tiene un patrón para botitas de bebé? Mi hija me dio la sorpresa que voy a ser abuela!', comentarios: [
+      { id: 'c1', autor: 'Norma', texto: '¡Felicitaciones! Yo tengo uno bien sencillo, te lo paso el jueves.' },
+    ] },
+    { id: 'p4', autor: 'Oscar', texto: 'Quería recomendar la tienda Nube por el Sanatorio Güemes, tienen mucha variedad de grosores, texturas y calidades de lana!', comentarios: [
+      { id: 'c1', autor: 'Marta', texto: 'Gracias por el dato, justo necesitaba lana gruesa.' },
     ] },
     { id: 'p2', autor: 'Marta', texto: 'Terminé el mantel bordado que empecé en el invierno. ¡Tres meses de trabajo pero quedó precioso!', comentarios: [
       { id: 'c1', autor: 'Haydee', texto: '¡Tenés que traerlo al taller para que lo veamos!' },
@@ -57,9 +72,12 @@ export const CLUBES: Club[] = [
     ] },
   ] },
   { id: 'cocina', titulo: 'Club de cocina', emoji: '🍳', descripcion: 'Recetas caseras y encuentros gastronómicos.', posts: [
-    { id: 'p1', autor: 'Susana', texto: 'Hoy preparé una tarta de manzana, ¡quedó riquísima! ¿Quieren la receta?', comentarios: [
-      { id: 'c1', autor: 'Norma', texto: '¡Sí, por favor! La mía siempre queda seca.' },
-      { id: 'c2', autor: 'Sergio', texto: 'Yo me anoto para probarla más que para cocinarla…' },
+    { id: 'p1', autor: 'Susana', texto: 'Les recomiendo empezar con recetas fáciles, cuando se sientan más seguros sumen un ingrediente y prueben!', comentarios: [
+      { id: 'c1', autor: 'Norma', texto: '¡Buen consejo! Yo arranqué así con las tartas.' },
+      { id: 'c2', autor: 'Sergio', texto: 'Yo me anoto para probarlas más que para cocinarlas…' },
+    ] },
+    { id: 'p4', autor: 'Marta', texto: 'El otro día leí las recetas de una chef espectacular, se llama Doña Petrona, muy buenas recetas para todos los niveles', comentarios: [
+      { id: 'c1', autor: 'Haydee', texto: 'Ese libro lo tengo de mi mamá, ¡es un tesoro!' },
     ] },
     { id: 'p2', autor: 'Haydee', texto: 'Mi secreto para las empanadas jugosas: cortar la carne a cuchillo, como me enseñó mi mamá.', comentarios: [
       { id: 'c1', autor: 'Roberto', texto: 'Así las hacía mi vieja también. ¡No hay comparación!' },

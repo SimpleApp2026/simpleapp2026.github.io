@@ -19,10 +19,10 @@ export const CAPACITACIONES: Capacitacion[] = [
   },
   {
     id: 'tecnologia-club',
-    titulo: 'Aprendé tecnología en el Club Argentino',
-    detalle: 'Comenzá tu camino digital con la tecnología de todos los días.',
+    titulo: 'Aprendé tecnología con Club Argentec',
+    detalle: 'Comenzá tu formación en tecnología.',
     descripcion: 'Encuentros semanales para aprender a usar el celular y la computadora con confianza: mensajes, fotos, videollamadas y trámites online, acompañado por docentes con mucha paciencia.',
-    lugar: 'Club Argentino, Talcahuano 955',
+    lugar: 'Club Argentec, Talcahuano 955',
     fecha: 'Jueves 11 de junio, 10:00h',
   },
   {

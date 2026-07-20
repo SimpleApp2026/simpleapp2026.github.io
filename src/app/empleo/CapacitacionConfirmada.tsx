@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
-import { Card } from '../../ui/Card'
-import { Button } from '../../ui/Button'
+import { ConfirmCard } from '../../ui/ConfirmCard'
 
 // Frame 39 del Figma: "Capacitación Final"
 export function CapacitacionConfirmada() {
@@ -10,15 +9,15 @@ export function CapacitacionConfirmada() {
   const titulo = (location.state as { titulo?: string } | null)?.titulo
 
   return (
-    <div>
-      <ScreenHeader title="Capacitaciones" />
-      <div className="p-6 flex flex-col items-center gap-6 text-center">
-        <div className="text-6xl" aria-hidden="true">🎉</div>
-        <Card className="w-full flex flex-col gap-2">
-          <h1 className="text-2xl font-bold">¡Felicidades!</h1>
-          <p className="text-lg">Ya te inscribiste{titulo ? ` a ${titulo}` : ''}.</p>
-        </Card>
-        <Button onClick={() => navigate('/app/empleo/capacitaciones')}>Ok</Button>
+    <div className="flex flex-col min-h-full">
+      <ScreenHeader title="Capacitaciones" onBack={() => navigate('/app/empleo/capacitaciones')} />
+      <div className="flex-1 px-6 py-14 flex flex-col items-center">
+        <ConfirmCard
+          titulo="¡Felicidades!"
+          principal="Ya te inscribiste"
+          nota={titulo ? `Te esperamos en "${titulo}".` : undefined}
+          onAccion={() => navigate('/app/empleo/capacitaciones')}
+        />
       </div>
     </div>
   )

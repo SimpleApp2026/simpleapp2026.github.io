@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { MicIcon, SpeakerIcon } from '../../ui/icons'
 import { useTts } from '../../state/hooks'
 import { PAPEL, Estampilla, TextoCarta } from './paper'
+import { CONVERSACIONES } from '../../data/foro'
 
 // ---------------------------------------------------------------------------
 // Pantalla de escritura de carta (frames 40-42 del Figma "Tutorial Carta"):
@@ -34,6 +35,7 @@ export function EscribirCarta() {
   const [paso, setPaso] = useState(0)
   const [campos, setCampos] = useState<string[]>(['', '', '', ''])
   const [cartaFinal, setCartaFinal] = useState('')
+  const [destino, setDestino] = useState('el foro público')
 
   const esRevision = paso === 2
   const setCampo = (i: number, v: string) =>
@@ -42,7 +44,7 @@ export function EscribirCarta() {
   const siguiente = () => {
     if (paso === 1) setCartaFinal((prev) => prev || campos.filter((c) => c.trim()).join('\n\n'))
     if (esRevision) {
-      navigate('/app/foro/enviada', { state: { destino: 'el foro público' } })
+      navigate('/app/foro/enviada', { state: { destino } })
     } else {
       setPaso((p) => p + 1)
     }
@@ -76,7 +78,22 @@ export function EscribirCarta() {
         </button>
       </div>
 
-      <p className="text-ink/45 text-sm mt-1">{paso + 1}/3</p>
+      {/* Selector de destinatario del Figma (frame 44): "Para: | Para foro público" */}
+      <label className="mt-3 flex items-center gap-3 rounded-full bg-surface/90 shadow-sm px-5 py-2.5">
+        <span className="text-ink/70">Para:</span>
+        <select
+          value={destino}
+          onChange={(e) => setDestino(e.target.value)}
+          aria-label="Destinatario de la carta"
+          className="flex-1 bg-transparent text-ink outline-none text-base">
+          <option value="el foro público">Para foro público</option>
+          {CONVERSACIONES.map((c) => (
+            <option key={c.id} value={c.amigo}>{c.amigo}</option>
+          ))}
+        </select>
+      </label>
+
+      <p className="text-ink/45 text-sm mt-3">{paso + 1}/3</p>
 
       {esRevision ? (
         <>

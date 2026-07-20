@@ -5,7 +5,7 @@ import { MicIcon } from '../../ui/icons'
 import { getCartaPrivada } from '../../data/foro'
 import { avatarDe } from '../../data/avatars'
 import { useUser } from '../../state/hooks'
-import { PAPEL, Estampilla, TextoCarta } from './paper'
+import { PAPEL, SelloPostal, TextoCarta } from './paper'
 
 export function Responder() {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export function Responder() {
           {fotoPropia
             ? <img src={fotoPropia} alt="" className="h-12 w-12 rounded-full object-cover" aria-hidden="true" />
             : <span className="h-12 w-12 rounded-full bg-chip/20 grid place-items-center text-xl" aria-hidden="true">👤</span>}
-          <Estampilla className="h-14 w-auto" />
+          <SelloPostal />
         </div>
 
         <h1 className="font-display text-3xl font-bold text-ink mt-4 mb-1">Escribí tu carta</h1>

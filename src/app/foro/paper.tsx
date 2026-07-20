@@ -31,6 +31,31 @@ export function Estampilla({ className = 'h-16 w-auto' }: { className?: string }
   )
 }
 
+// Matasellos redondo que en el Figma acompaña a la estampilla ("SAN TELMO · CAB")
+export function Matasellos({ className = 'h-12 w-12' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+      <g fill="none" stroke="#B4614F" strokeWidth="1.6" opacity="0.75">
+        <circle cx="32" cy="32" r="24" />
+        <circle cx="32" cy="32" r="18" strokeDasharray="3 3" />
+        <path d="M4 24 q7 3 14 0 M4 30 q7 3 14 0 M4 36 q7 3 14 0" />
+      </g>
+      <text x="32" y="28" fontSize="7" fill="#B4614F" opacity="0.85" textAnchor="middle">SAN TELMO</text>
+      <text x="32" y="41" fontSize="9" fontWeight="bold" fill="#B4614F" opacity="0.85" textAnchor="middle">CAB</text>
+    </svg>
+  )
+}
+
+/** Estampilla + matasellos, como se ven juntos en las cartas del Figma */
+export function SelloPostal({ className = '' }: { className?: string }) {
+  return (
+    <span className={`flex items-start gap-1 ${className}`}>
+      <Matasellos className="h-11 w-11 mt-3" />
+      <Estampilla className="h-16 w-auto" />
+    </span>
+  )
+}
+
 // Textarea "invisible": sin borde ni fondo, crece con el contenido,
 // placeholder gris y caret navy titilante sobre el papel.
 export function TextoCarta(

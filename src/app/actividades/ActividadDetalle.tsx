@@ -45,7 +45,8 @@ export function ActividadDetalle() {
           <p className="text-ink/80">📍 {actividad.lugar}</p>
           <p className="text-ink/60">{actividad.fecha}</p>
         </Card>
-        <Button onClick={reservar}>{actividad.categoria === 'salud' ? '¡Quiero ir!' : 'Reservar'}</Button>
+        {/* El Figma usa el mismo llamado a la acción en todas las categorías */}
+        <Button onClick={reservar}>¡Quiero ir!</Button>
       </div>
     </div>
   )

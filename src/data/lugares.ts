@@ -36,7 +36,7 @@ export const LUGARES: Lugar[] = [
   { id: 'salud-stretching', nombre: 'Plaza Francia', evento: 'Clases de stretching en Comuna 2', fecha: 'Miércoles, 10hs', cat: 'salud', lat: -34.5838, lng: -58.3936, link: '/app/actividades/salud/salud-stretching' },
   // Capacitaciones
   { id: 'cap-ia', nombre: 'Biblioteca del barrio, Av. Corrientes 1420', evento: 'IA para todos: Aprendé paso a paso', fecha: 'Martes 9 de junio, 15:00h', cat: 'capacitacion', lat: -34.6039, lng: -58.3874, link: '/app/empleo/capacitaciones/ia-para-todos' },
-  { id: 'cap-tecnologia', nombre: 'Club Argentino, Talcahuano 955', evento: 'Aprendé tecnología en el Club Argentino', fecha: 'Jueves 11 de junio, 10:00h', cat: 'capacitacion', lat: -34.5993, lng: -58.3849, link: '/app/empleo/capacitaciones/tecnologia-club' },
+  { id: 'cap-tecnologia', nombre: 'Club Argentec, Talcahuano 955', evento: 'Aprendé tecnología con Club Argentec', fecha: 'Jueves 11 de junio, 10:00h', cat: 'capacitacion', lat: -34.5993, lng: -58.3849, link: '/app/empleo/capacitaciones/tecnologia-club' },
   { id: 'cap-auxilios', nombre: 'Luna 47, Parque Patricios', evento: 'Capacitate en primeros auxilios', fecha: 'Viernes 12 de junio, 14:00h', cat: 'capacitacion', lat: -34.6366, lng: -58.4008, link: '/app/empleo/capacitaciones/primeros-auxilios' },
   // Club de música
   { id: 'teatro-colon', nombre: 'Teatro Colón', evento: 'Réquiem de Mozart (Club de música)', fecha: 'Sábado a la noche', cat: 'musica', lat: -34.6011, lng: -58.3826, link: '/app/clubes/musica' },

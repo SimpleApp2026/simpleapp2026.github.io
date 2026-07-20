@@ -5,7 +5,7 @@ import { SpeakerIcon } from '../../ui/icons'
 import { getCartaPrivada } from '../../data/foro'
 import { avatarDe } from '../../data/avatars'
 import { useTts } from '../../state/hooks'
-import { PAPEL, Estampilla } from './paper'
+import { PAPEL, SelloPostal } from './paper'
 
 export function CartaPrivada() {
   const navigate = useNavigate()
@@ -45,7 +45,7 @@ export function CartaPrivada() {
               <p className="text-ink/50 text-sm">{carta.fecha}</p>
             </div>
           </div>
-          <Estampilla className="h-14 w-auto" />
+          <SelloPostal />
         </div>
 
         <p className="mt-5 text-lg leading-relaxed text-ink/85 whitespace-pre-line">{carta.texto}</p>

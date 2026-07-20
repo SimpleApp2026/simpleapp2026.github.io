@@ -7,7 +7,7 @@ import { SpeakerIcon } from '../../ui/icons'
 import { getCartaPublica, type Comentario } from '../../data/foro'
 import { avatarDe } from '../../data/avatars'
 import { useTts } from '../../state/hooks'
-import { PAPEL, Estampilla } from './paper'
+import { PAPEL, SelloPostal } from './paper'
 
 export function CartaPublica() {
   const navigate = useNavigate()
@@ -62,7 +62,7 @@ function CartaPublicaAbierta({ carta }: { carta: NonNullable<ReturnType<typeof g
               <p className="text-ink/50 text-sm">{carta.fecha}</p>
             </div>
           </div>
-          <Estampilla className="h-14 w-auto" />
+          <SelloPostal />
         </div>
 
         <p className="mt-4 text-lg leading-relaxed text-ink/85 whitespace-pre-line">{carta.texto}</p>

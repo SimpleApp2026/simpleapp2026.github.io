@@ -1,12 +1,14 @@
 import { CLUBES, getClub } from './clubes'
 import { avatarDe } from './avatars'
 
-test('has seven clubs with unique ids and posts', () => {
-  // 5 clubs de los frames del Figma + chisme y música (estampillas de "Clubes iconos")
-  expect(CLUBES).toHaveLength(7)
-  expect(new Set(CLUBES.map((c) => c.id)).size).toBe(7)
-  // 3 mensajes por club, como los boards del Figma (frame 60)
-  expect(CLUBES.every((c) => c.posts.length === 3)).toBe(true)
+test('has the eight Figma clubs with unique ids and posts', () => {
+  // clubes de los frames 60 del Figma (lectura, chisme, música, viajes,
+  // manualidades, cocina, bienestar y mascotas)
+  expect(CLUBES).toHaveLength(8)
+  expect(new Set(CLUBES.map((c) => c.id)).size).toBe(8)
+  expect(CLUBES.map((c) => c.id)).toContain('viajes')
+  // al menos 3 mensajes por club, como los boards del Figma
+  expect(CLUBES.every((c) => c.posts.length >= 3)).toBe(true)
 })
 
 test('every club post author has a real avatar photo', () => {

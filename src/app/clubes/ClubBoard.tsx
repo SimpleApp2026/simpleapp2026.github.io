@@ -6,7 +6,8 @@ import { avatarDe } from '../../data/avatars'
 import { useUser } from '../../state/hooks'
 
 // Reacciones de los boards de clubes (frame 60 del Figma)
-const REACCIONES = ['🙏', '❤️', '😂', '😮', '😊']
+// Barra de reacciones tal cual el Figma (frames 60)
+const REACCIONES = ['👍', '❤️', '😂', '😮', '😭', '😡']
 
 // Publicación del club: burbuja gris + fila avatar / pill comentarios /
 // reacciones, y el hilo de comentarios desplegable (frame 60 del Figma).

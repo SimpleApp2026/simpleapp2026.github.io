@@ -32,7 +32,8 @@ test('full flow: conocer más → detail → inscribite → felicidades', async 
   expect(screen.getByText(new RegExp(CAPACITACIONES[2].lugar))).toBeInTheDocument()
   await userEvent.click(screen.getByRole('button', { name: /Inscribite/i }))
   expect(screen.getByText(/¡Felicidades!/i)).toBeInTheDocument()
-  expect(screen.getByText(new RegExp(`Ya te inscribiste a ${CAPACITACIONES[2].titulo}`))).toBeInTheDocument()
+  expect(screen.getByText(/Ya te inscribiste/)).toBeInTheDocument()
+  expect(screen.getByText(new RegExp(CAPACITACIONES[2].titulo))).toBeInTheDocument()
 })
 
 test('unknown capacitación shows not found', () => {
