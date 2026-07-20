@@ -22,6 +22,8 @@ import { Oportunidades } from './app/empleo/Oportunidades'
 import { Postular } from './app/empleo/Postular'
 import { PostulacionConfirmada } from './app/empleo/PostulacionConfirmada'
 import { Capacitaciones } from './app/empleo/Capacitaciones'
+import { CapacitacionDetalle } from './app/empleo/CapacitacionDetalle'
+import { CapacitacionConfirmada } from './app/empleo/CapacitacionConfirmada'
 import { ForoLayout } from './app/foro/ForoLayout'
 import { CartasPublicas } from './app/foro/CartasPublicas'
 import { CartasPrivadas } from './app/foro/CartasPrivadas'
@@ -81,6 +83,8 @@ export function AppRoutes() {
           <Route path="oportunidades/:id" element={<Postular />} />
           <Route path="postulado" element={<PostulacionConfirmada />} />
           <Route path="capacitaciones" element={<Capacitaciones />} />
+          <Route path="capacitaciones/inscripto" element={<CapacitacionConfirmada />} />
+          <Route path="capacitaciones/:id" element={<CapacitacionDetalle />} />
         </Route>
         <Route path="descuentos" element={<DescuentosList />} />
         <Route path="descuentos/confirmado" element={<DescuentoConfirmado />} />
