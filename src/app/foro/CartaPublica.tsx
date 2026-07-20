@@ -11,11 +11,8 @@ import { PAPEL, Estampilla } from './paper'
 
 export function CartaPublica() {
   const navigate = useNavigate()
-  const { speak } = useTts()
   const { id } = useParams<{ id: string }>()
   const carta = getCartaPublica(id ?? '')
-  const [comentarios, setComentarios] = useState<Comentario[]>(carta ? carta.comentarios : [])
-  const [texto, setTexto] = useState('')
 
   if (!carta) {
     return (
@@ -25,6 +22,17 @@ export function CartaPublica() {
       </div>
     )
   }
+
+  // key por id: navegar de una carta a otra remonta el componente y
+  // resiembra los comentarios de la carta nueva (misma ruta :id).
+  return <CartaPublicaAbierta key={carta.id} carta={carta} />
+}
+
+function CartaPublicaAbierta({ carta }: { carta: NonNullable<ReturnType<typeof getCartaPublica>> }) {
+  const navigate = useNavigate()
+  const { speak } = useTts()
+  const [comentarios, setComentarios] = useState<Comentario[]>(carta.comentarios)
+  const [texto, setTexto] = useState('')
 
   const comentar = () => {
     if (!texto.trim()) return

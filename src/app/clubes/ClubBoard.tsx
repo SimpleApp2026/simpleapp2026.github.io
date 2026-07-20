@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { Button } from '../../ui/Button'
-import { getClub, type Post } from '../../data/clubes'
+import { getClub, type Club, type Post } from '../../data/clubes'
 import { avatarDe } from '../../data/avatars'
 
 // Reacciones de los boards de clubes (frame 60 del Figma)
@@ -57,9 +57,6 @@ export function ClubBoard() {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const club = getClub(id ?? '')
-  const [posts, setPosts] = useState<Post[]>(club ? club.posts : [])
-  const [texto, setTexto] = useState('')
-  const [componiendo, setComponiendo] = useState(false)
 
   if (!club) {
     return (
@@ -69,6 +66,17 @@ export function ClubBoard() {
       </div>
     )
   }
+
+  // key por id: al navegar de un club a otro (misma ruta :id) fuerza el
+  // remount para que los posts en estado local se resiembren del club nuevo.
+  return <ClubBoardInner key={club.id} club={club} />
+}
+
+function ClubBoardInner({ club }: { club: Club }) {
+  const navigate = useNavigate()
+  const [posts, setPosts] = useState<Post[]>(club.posts)
+  const [texto, setTexto] = useState('')
+  const [componiendo, setComponiendo] = useState(false)
 
   const publicar = () => {
     if (!texto.trim()) return
