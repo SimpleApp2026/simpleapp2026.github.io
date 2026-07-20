@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { SpeakerIcon } from '../../ui/icons'
@@ -11,6 +12,7 @@ export function CartaPrivada() {
   const { speak } = useTts()
   const { id } = useParams<{ id: string }>()
   const carta = getCartaPrivada(id ?? '')
+  const [menuAbierto, setMenuAbierto] = useState(false)
 
   if (!carta) {
     return (
@@ -27,7 +29,7 @@ export function CartaPrivada() {
     <div className="flex flex-col min-h-full">
       <ScreenHeader title="Foro" onBack={() => navigate('/app/foro/privadas')} />
       {/* Carta abierta sobre papel (frame 52 del Figma) */}
-      <div className="flex-1 px-5 pt-5 pb-8 flex flex-col" style={PAPEL}>
+      <div className="relative flex-1 px-5 pt-5 pb-8 flex flex-col" style={PAPEL}>
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3">
             {foto && <img src={foto} alt="" className="h-12 w-12 rounded-full object-cover" aria-hidden="true" />}
@@ -48,7 +50,16 @@ export function CartaPrivada() {
 
         <p className="mt-5 text-lg leading-relaxed text-ink/85 whitespace-pre-line">{carta.texto}</p>
 
-        <div className="mt-auto pt-8 flex justify-center">
+        {/* Tres puntitos + Responder (frames 52-53 del Figma) */}
+        <div className="mt-auto pt-6 flex flex-col items-center gap-1">
+          <button
+            aria-label="Más opciones"
+            aria-haspopup="menu"
+            aria-expanded={menuAbierto}
+            onClick={() => setMenuAbierto(true)}
+            className="px-6 py-1 text-2xl tracking-[0.35em] leading-none text-ink/60 hover:text-ink">
+            •••
+          </button>
           <button
             onClick={() => navigate(`/app/foro/privada/${carta.id}/responder`)}
             className="rounded-full border-2 border-navy-900 bg-transparent text-navy-900
@@ -56,6 +67,34 @@ export function CartaPrivada() {
             Responder
           </button>
         </div>
+
+        {/* Menú contextual del usuario (frame 53 del Figma) */}
+        {menuAbierto && (
+          <>
+            <div className="fixed inset-0 z-10" onClick={() => setMenuAbierto(false)} aria-hidden="true" />
+            <div role="menu" aria-label="Opciones del usuario"
+              className="absolute bottom-28 right-4 z-20 w-60 rounded-2xl bg-white shadow-xl border border-chip/20 overflow-hidden">
+              <button role="menuitem" onClick={() => setMenuAbierto(false)}
+                className="w-full text-center py-3 px-4 text-red-600 font-medium border-b border-chip/15 hover:bg-red-50">
+                Reportar usuario
+              </button>
+              <button role="menuitem" onClick={() => setMenuAbierto(false)}
+                className="w-full text-center py-3 px-4 text-ink border-b border-chip/15 hover:bg-bg">
+                Ocultar usuario
+              </button>
+              <button role="menuitem" onClick={() => setMenuAbierto(false)}
+                className="w-full text-center py-3 px-4 text-ink hover:bg-bg">
+                Ver perfil del usuario
+              </button>
+              <div className="px-4 pb-3 pt-1">
+                <button role="menuitem" onClick={() => setMenuAbierto(false)}
+                  className="w-full rounded-full bg-navy-900 text-white py-1.5 text-sm font-semibold hover:bg-navy-800">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

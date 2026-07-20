@@ -54,3 +54,15 @@ test('opening and replying to a private letter confirms with the friend name', a
   await userEvent.click(screen.getByRole('button', { name: /Enviar/i }))
   expect(screen.getByText(/Sergio/)).toBeInTheDocument()
 })
+
+test('the three-dots menu on a private letter shows the user options and Cancelar closes it', async () => {
+  router('/app/foro/privada/sergio')
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument()
+  await userEvent.click(screen.getByRole('button', { name: /Más opciones/i }))
+  expect(screen.getByRole('menu')).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Reportar usuario/i })).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Ocultar usuario/i })).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Ver perfil del usuario/i })).toBeInTheDocument()
+  await userEvent.click(screen.getByRole('menuitem', { name: /Cancelar/i }))
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument()
+})
