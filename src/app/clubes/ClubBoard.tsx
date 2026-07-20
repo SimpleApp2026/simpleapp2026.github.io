@@ -21,16 +21,19 @@ function PublicacionClub({ post }: { post: Post }) {
     })
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="rounded-2xl bg-[#EDEDED] px-4 py-3 text-ink/85 leading-relaxed max-w-[94%]">
+    // La burbuja es más alta y la fila (avatar / comentarios / reacciones) se
+    // superpone sobre su borde inferior: todo se lee como una sola pieza, con
+    // la foto de perfil asomándose fuera de la burbuja (frame 60 del Figma).
+    <div className="relative">
+      <div className="ml-4 rounded-2xl bg-[#EDEDED] px-4 pt-3 pb-10 text-ink/85 leading-relaxed">
         <span className="sr-only">{post.autor} escribió: </span>
         {post.texto}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="-mt-6 flex items-center gap-2 relative z-[1]">
         {foto
-          ? <img src={foto} alt={post.autor} className="h-8 w-8 rounded-full object-cover shrink-0" />
-          : <span className="h-8 w-8 rounded-full bg-chip/20 grid place-items-center text-sm shrink-0" aria-label={post.autor}>👤</span>}
-        <button className="rounded-full bg-teal px-4 py-1 text-sm font-medium text-navy-900 hover:bg-teal-dark">
+          ? <img src={foto} alt={post.autor} className="h-10 w-10 rounded-full object-cover shrink-0 ring-2 ring-white shadow" />
+          : <span className="h-10 w-10 rounded-full bg-chip/30 grid place-items-center shrink-0 ring-2 ring-white shadow" aria-label={post.autor}>👤</span>}
+        <button className="rounded-full bg-teal px-4 py-1 text-sm font-medium text-navy-900 shadow-sm hover:bg-teal-dark">
           comentarios
         </button>
         <div className="rounded-full bg-white border border-chip/20 shadow-sm px-2.5 py-1 flex items-center gap-1">
