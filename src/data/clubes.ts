@@ -94,3 +94,22 @@ export const CLUBES: Club[] = [
 export function getClub(id: string): Club | undefined {
   return CLUBES.find((c) => c.id === id)
 }
+
+// --- Posts agregados por el usuario en la sesión (pantalla "Comentá en tu club") ---
+const agregados = new Map<string, Post[]>()
+
+export function agregarPostClub(clubId: string, autor: string, texto: string): void {
+  const lista = agregados.get(clubId) ?? []
+  lista.push({ id: `agregado-${clubId}-${lista.length}`, autor, texto, comentarios: [] })
+  agregados.set(clubId, lista)
+}
+
+/** Posts del club: los del fixture + los agregados por el usuario en la sesión. */
+export function postsDeClub(club: Club): Post[] {
+  return [...club.posts, ...(agregados.get(club.id) ?? [])]
+}
+
+/** Solo para tests. */
+export function limpiarPostsAgregados(): void {
+  agregados.clear()
+}

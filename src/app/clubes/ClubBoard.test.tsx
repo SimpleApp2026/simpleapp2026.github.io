@@ -2,27 +2,40 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { ClubBoard } from './ClubBoard'
+import { ComentarClub } from './ComentarClub'
 import { TtsProvider } from '../../state/TtsProvider'
+import { UserProvider } from '../../state/UserProvider'
+import { limpiarPostsAgregados } from '../../data/clubes'
 
 function setup(path: string) {
   return render(
-    <TtsProvider><MemoryRouter initialEntries={[path]}>
+    <UserProvider><TtsProvider><MemoryRouter initialEntries={[path]}>
       <Routes>
         <Route path="/app/clubes/:id" element={<ClubBoard />} />
+        <Route path="/app/clubes/:id/comentar" element={<ComentarClub />} />
         <Route path="/app/clubes" element={<div>Clubes</div>} />
       </Routes>
-    </MemoryRouter></TtsProvider>,
+    </MemoryRouter></TtsProvider></UserProvider>,
   )
 }
 
-test('shows club posts as bubbles and can publish a new one', async () => {
+beforeEach(() => {
+  localStorage.clear()
+  limpiarPostsAgregados()
+})
+
+test('COMENTAR EN EL CLUB opens the compose screen and the new post joins the board', async () => {
   setup('/app/clubes/lectura')
   expect(screen.getByRole('heading', { name: /Club de Lectura/i })).toBeInTheDocument()
   expect(screen.getByText(/Ayer volví a releer/)).toBeInTheDocument()
-  // el composer se abre con el botón "+ COMENTAR EN EL CLUB"
+  // abre la pantalla "Comentá en tu club" (frames 61-63)
   await userEvent.click(screen.getByRole('button', { name: /COMENTAR EN EL CLUB/i }))
-  await userEvent.type(screen.getByLabelText(/Comentar en el club/i), 'Estoy leyendo poesía')
-  await userEvent.click(screen.getByRole('button', { name: /Publicar/i }))
+  expect(screen.getByRole('heading', { name: /Comentá en tu club/i })).toBeInTheDocument()
+  expect(screen.getByText(/vía mensaje de voz/i)).toBeInTheDocument()
+  await userEvent.type(screen.getByLabelText('Escribí tu comentario'), 'Estoy leyendo poesía')
+  await userEvent.click(screen.getByRole('button', { name: /^Enviar$/ }))
+  // de vuelta en el board, el comentario aparece en la lista del club
+  expect(screen.getByRole('heading', { name: /Club de Lectura/i })).toBeInTheDocument()
   expect(screen.getByText('Estoy leyendo poesía')).toBeInTheDocument()
 })
 

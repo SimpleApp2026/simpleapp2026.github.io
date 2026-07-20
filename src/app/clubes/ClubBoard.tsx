@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
-import { Button } from '../../ui/Button'
-import { getClub, type Club, type Post, type ComentarioClub } from '../../data/clubes'
+import { getClub, postsDeClub, type Club, type Post, type ComentarioClub } from '../../data/clubes'
 import { avatarDe } from '../../data/avatars'
 
 // Reacciones de los boards de clubes (frame 60 del Figma)
@@ -123,45 +122,21 @@ export function ClubBoard() {
 
 function ClubBoardInner({ club }: { club: Club }) {
   const navigate = useNavigate()
-  const [posts, setPosts] = useState<Post[]>(club.posts)
-  const [texto, setTexto] = useState('')
-  const [componiendo, setComponiendo] = useState(false)
-
-  const publicar = () => {
-    if (!texto.trim()) return
-    setPosts((prev) => [...prev, { id: `nuevo-${prev.length}`, autor: 'Vos', texto: texto.trim(), comentarios: [] }])
-    setTexto('')
-    setComponiendo(false)
-  }
+  // Fixture + posts agregados en la sesión desde la pantalla "Comentá en tu club"
+  const posts = postsDeClub(club)
 
   return (
     <div>
       <ScreenHeader title={club.titulo} onBack={() => navigate('/app/clubes')} />
       <div className="p-4 flex flex-col gap-5">
-        {/* Botón "+ COMENTAR EN EL CLUB" (frame 60 del Figma) */}
+        {/* Botón "+ COMENTAR EN EL CLUB" (frame 60): abre la pantalla de comentario */}
         <button
-          onClick={() => setComponiendo(true)}
+          onClick={() => navigate(`/app/clubes/${club.id}/comentar`)}
           className="self-center flex items-center gap-2.5 rounded-full bg-white border border-chip/25 shadow-sm
             px-9 py-3.5 text-sm font-bold tracking-wide text-navy-900 hover:bg-bg">
           <span className="grid place-items-center h-5 w-5 rounded-full bg-teal text-navy-900 text-sm leading-none" aria-hidden="true">+</span>
           COMENTAR EN EL CLUB
         </button>
-
-        {componiendo && (
-          <div className="flex flex-col gap-2">
-            <label className="sr-only" htmlFor="club-composer">Comentar en el club</label>
-            <textarea
-              id="club-composer"
-              autoFocus
-              rows={3}
-              value={texto}
-              onChange={(e) => setTexto(e.target.value)}
-              placeholder="Escribí tu comentario..."
-              className="w-full rounded-2xl border border-chip/30 bg-surface p-3 text-base resize-none"
-            />
-            <Button onClick={publicar}>Publicar</Button>
-          </div>
-        )}
 
         <div className="flex flex-col gap-5">
           {posts.map((p) => <PublicacionClub key={p.id} post={p} />)}
