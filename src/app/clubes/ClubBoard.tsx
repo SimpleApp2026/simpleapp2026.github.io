@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { getClub, postsDeClub, type Club, type Post, type ComentarioClub } from '../../data/clubes'
 import { avatarDe } from '../../data/avatars'
+import { useUser } from '../../state/hooks'
 
 // Reacciones de los boards de clubes (frame 60 del Figma)
 const REACCIONES = ['🙏', '❤️', '😂', '😮', '😊']
@@ -10,7 +11,9 @@ const REACCIONES = ['🙏', '❤️', '😂', '😮', '😊']
 // Publicación del club: burbuja gris + fila avatar / pill comentarios /
 // reacciones, y el hilo de comentarios desplegable (frame 60 del Figma).
 function PublicacionClub({ post }: { post: Post }) {
-  const foto = avatarDe(post.autor)
+  const { profile } = useUser()
+  // Foto explícita del post (usuario logueado) o resolución por nombre
+  const foto = post.foto ?? avatarDe(post.autor)
   const [elegidas, setElegidas] = useState<Set<string>>(new Set())
   const [hiloAbierto, setHiloAbierto] = useState(false)
   const [comentarios, setComentarios] = useState<ComentarioClub[]>(post.comentarios)
@@ -25,7 +28,9 @@ function PublicacionClub({ post }: { post: Post }) {
 
   const comentar = () => {
     if (!nuevo.trim()) return
-    setComentarios((prev) => [...prev, { id: `nuevo-${prev.length}`, autor: 'Vos', texto: nuevo.trim() }])
+    const autor = profile?.nombre || 'Vos'
+    const fotoPropia = profile?.fotoDataUrl ?? avatarDe(autor)
+    setComentarios((prev) => [...prev, { id: `nuevo-${prev.length}`, autor, texto: nuevo.trim(), foto: fotoPropia }])
     setNuevo('')
   }
 
@@ -75,7 +80,7 @@ function PublicacionClub({ post }: { post: Post }) {
           </p>
           <div className="flex flex-col divide-y divide-chip/15">
             {comentarios.map((c) => {
-              const fotoC = avatarDe(c.autor)
+              const fotoC = c.foto ?? avatarDe(c.autor)
               return (
                 <div key={c.id} className="flex items-center gap-3 py-2.5">
                   {fotoC

@@ -1,5 +1,7 @@
-export interface ComentarioClub { id: string; autor: string; texto: string }
-export interface Post { id: string; autor: string; texto: string; comentarios: ComentarioClub[] }
+// `foto`: avatar explícito (ej. la foto subida por el usuario logueado);
+// si falta, la UI resuelve por nombre contra el registro avatarDe().
+export interface ComentarioClub { id: string; autor: string; texto: string; foto?: string }
+export interface Post { id: string; autor: string; texto: string; comentarios: ComentarioClub[]; foto?: string }
 export interface Club { id: string; titulo: string; emoji: string; descripcion: string; posts: Post[] }
 
 // Boards de clubes: 3 mensajes por club, cada uno con su hilo de comentarios
@@ -98,9 +100,9 @@ export function getClub(id: string): Club | undefined {
 // --- Posts agregados por el usuario en la sesión (pantalla "Comentá en tu club") ---
 const agregados = new Map<string, Post[]>()
 
-export function agregarPostClub(clubId: string, autor: string, texto: string): void {
+export function agregarPostClub(clubId: string, autor: string, texto: string, foto?: string): void {
   const lista = agregados.get(clubId) ?? []
-  lista.push({ id: `agregado-${clubId}-${lista.length}`, autor, texto, comentarios: [] })
+  lista.push({ id: `agregado-${clubId}-${lista.length}`, autor, texto, comentarios: [], foto })
   agregados.set(clubId, lista)
 }
 

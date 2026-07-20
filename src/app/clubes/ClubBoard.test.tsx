@@ -68,3 +68,27 @@ test('unknown club shows not found', () => {
   setup('/app/clubes/zzz')
   expect(screen.getByText(/no encontrado/i)).toBeInTheDocument()
 })
+
+test('a new post and thread comment use the logged-in user uploaded photo', async () => {
+  const miFoto = 'data:image/png;base64,MIFOTO'
+  localStorage.setItem('simple.user', JSON.stringify({
+    profile: { nombre: 'Manuel', apellido: 'H', barrio: '', fechaNacimiento: '', fotoDataUrl: miFoto, intereses: [] },
+    identified: true,
+  }))
+  setup('/app/clubes/lectura')
+  // post nuevo desde la pantalla de comentario
+  await userEvent.click(screen.getByRole('button', { name: /COMENTAR EN EL CLUB/i }))
+  await userEvent.type(screen.getByLabelText('Escribí tu comentario'), 'Hola desde mi cuenta')
+  await userEvent.click(screen.getByRole('button', { name: /^Enviar$/ }))
+  const burbuja = screen.getByText('Hola desde mi cuenta')
+  expect(screen.getByAltText('Manuel')).toHaveAttribute('src', miFoto)
+  expect(burbuja).toBeInTheDocument()
+  // comentario en un hilo existente
+  await userEvent.click(screen.getAllByRole('button', { name: /^comentarios$/i })[0])
+  await userEvent.type(screen.getByLabelText(/Comentá acá/i), 'Comento con mi foto')
+  await userEvent.keyboard('{Enter}')
+  expect(screen.getByText('Comento con mi foto')).toBeInTheDocument()
+  // dos imágenes con mi foto: la del post nuevo y la del comentario
+  const propias = screen.getAllByAltText('Manuel').filter((el) => el.getAttribute('src') === miFoto)
+  expect(propias.length).toBeGreaterThanOrEqual(2)
+})
