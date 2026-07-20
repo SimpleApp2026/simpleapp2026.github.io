@@ -1,0 +1,64 @@
+# Publica la SPA construida (dist/) en GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Se ejecuta en cada push a la rama principal
+  push:
+    branches: ["main"]
+
+  # Permite ejecutarlo a mano desde la pestaña Actions
+  workflow_dispatch:
+
+# Permisos del GITHUB_TOKEN necesarios para publicar en Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo despliegue a la vez: no cancela el que está en curso y descarta los
+# encolados intermedios.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          # Sólo la app construida, no el repositorio entero
+          path: dist
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
