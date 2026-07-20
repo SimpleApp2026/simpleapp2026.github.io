@@ -5,7 +5,10 @@ import { PAPEL } from './paper'
 export function CartaEnviada() {
   const navigate = useNavigate()
   const location = useLocation()
-  const destino = (location.state as { destino?: string } | null)?.destino
+  const state = location.state as { destino?: string; origen?: string } | null
+  const destino = state?.destino
+  // Volvemos a la pestaña de origen (Amigos / Cartas privadas); por defecto, al foro.
+  const volver = state?.origen ?? '/app/foro'
   return (
     <div className="flex flex-col min-h-full">
       <ScreenHeader title="Foro" />
@@ -15,7 +18,7 @@ export function CartaEnviada() {
           <h1 className="text-2xl font-bold">¡Felicitaciones!</h1>
           <p className="text-lg text-white/90">Tu carta fue enviada a {destino ?? 'destino'}.</p>
           <button
-            onClick={() => navigate('/app/foro')}
+            onClick={() => navigate(volver)}
             className="mt-4 self-center rounded-full border-2 border-white/80 text-white
               px-10 py-1.5 text-base font-semibold hover:bg-white hover:text-navy-900 transition">
             Ok

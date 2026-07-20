@@ -34,7 +34,9 @@ export function Amigos() {
           key={c.id}
           className="text-left"
           onClick={() => {
-            if (getCartaPrivada(c.id)) navigate(`/app/foro/privada/${c.id}`)
+            // Guardamos de qué pestaña venimos para que "atrás" y el envío
+            // vuelvan a Amigos y no a Cartas privadas.
+            if (getCartaPrivada(c.id)) navigate(`/app/foro/privada/${c.id}`, { state: { origen: '/app/foro/amigos' } })
           }}
         >
           <span className="flex items-center gap-3 rounded-2xl bg-surface shadow-sm p-3">

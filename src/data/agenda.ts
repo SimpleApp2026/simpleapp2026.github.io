@@ -1,6 +1,6 @@
 export interface AgendaItem { id: string; titulo: string; horario: string }
 
-export const AGENDA_FECHA = 'Miércoles 21 de mayo 2026'
+export const AGENDA_FECHA = 'Jueves 23 de julio 2026'
 
 export const AGENDA: AgendaItem[] = [
   { id: 'yoga', titulo: 'Yoga en plaza Vicente López', horario: '13:00 – 15:00' },

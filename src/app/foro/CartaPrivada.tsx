@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { SpeakerIcon } from '../../ui/icons'
 import { getCartaPrivada } from '../../data/foro'
@@ -9,15 +9,18 @@ import { PAPEL, SelloPostal } from './paper'
 
 export function CartaPrivada() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { speak } = useTts()
   const { id } = useParams<{ id: string }>()
   const carta = getCartaPrivada(id ?? '')
   const [menuAbierto, setMenuAbierto] = useState(false)
+  // Pestaña de la que venimos (Amigos o Cartas privadas), para volver a ella.
+  const origen = (location.state as { origen?: string } | null)?.origen ?? '/app/foro/privadas'
 
   if (!carta) {
     return (
       <div>
-        <ScreenHeader title="Foro" onBack={() => navigate('/app/foro/privadas')} />
+        <ScreenHeader title="Foro" onBack={() => navigate(origen)} />
         <p className="p-6 text-lg">Carta no encontrada.</p>
       </div>
     )
@@ -27,7 +30,7 @@ export function CartaPrivada() {
 
   return (
     <div className="flex flex-col min-h-full">
-      <ScreenHeader title="Foro" onBack={() => navigate('/app/foro/privadas')} />
+      <ScreenHeader title="Foro" onBack={() => navigate(origen)} />
       {/* Carta abierta sobre papel (frame 52 del Figma) */}
       <div className="relative flex-1 px-5 pt-5 pb-8 flex flex-col" style={PAPEL}>
         <div className="flex items-start justify-between">
@@ -61,7 +64,7 @@ export function CartaPrivada() {
             •••
           </button>
           <button
-            onClick={() => navigate(`/app/foro/privada/${carta.id}/responder`)}
+            onClick={() => navigate(`/app/foro/privada/${carta.id}/responder`, { state: { origen } })}
             className="rounded-full border-2 border-navy-900 bg-transparent text-navy-900
               px-10 py-2 text-lg font-semibold hover:bg-navy-900 hover:text-white transition">
             Responder

@@ -15,7 +15,7 @@ export const CAPACITACIONES: Capacitacion[] = [
     detalle: '¡Aprendé a usar la IA simple y rápido!',
     descripcion: 'Un taller pensado para descubrir qué es la inteligencia artificial y cómo puede ayudarte en el día a día: hacer preguntas, pedir recomendaciones y resolver dudas, todo con ejemplos simples y a tu ritmo.',
     lugar: 'Biblioteca del barrio, Av. Corrientes 1420',
-    fecha: 'Martes 9 de junio, 15:00h',
+    fecha: 'Martes 28 de julio, 15:00h',
   },
   {
     id: 'tecnologia-club',
@@ -23,7 +23,7 @@ export const CAPACITACIONES: Capacitacion[] = [
     detalle: 'Comenzá tu formación en tecnología.',
     descripcion: 'Encuentros semanales para aprender a usar el celular y la computadora con confianza: mensajes, fotos, videollamadas y trámites online, acompañado por docentes con mucha paciencia.',
     lugar: 'Club Argentec, Talcahuano 955',
-    fecha: 'Jueves 11 de junio, 10:00h',
+    fecha: 'Jueves 30 de julio, 10:00h',
   },
   {
     id: 'primeros-auxilios',
@@ -31,7 +31,7 @@ export const CAPACITACIONES: Capacitacion[] = [
     detalle: 'Una charla para estar preparados en el momento justo.',
     descripcion: 'Una charla pensada para aprender a identificar cuáles son las principales emergencias y cómo actuar en cada caso: golpes, caídas y maniobras básicas de auxilio, con práctica guiada.',
     lugar: 'Luna 47, Parque Patricios',
-    fecha: 'Viernes 12 de junio, 14:00h',
+    fecha: 'Viernes 31 de julio, 14:00h',
   },
 ]
 

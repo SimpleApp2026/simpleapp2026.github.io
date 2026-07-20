@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { ScreenHeader } from '../../layout/ScreenHeader'
 import { MicIcon } from '../../ui/icons'
 import { getCartaPrivada } from '../../data/foro'
@@ -9,15 +9,17 @@ import { PAPEL, SelloPostal, TextoCarta } from './paper'
 
 export function Responder() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { profile } = useUser()
   const { id } = useParams<{ id: string }>()
   const [texto, setTexto] = useState('')
   const destino = getCartaPrivada(id ?? '')?.de ?? 'tu amigo'
+  const origen = (location.state as { origen?: string } | null)?.origen ?? '/app/foro/privadas'
   const fotoPropia = profile?.fotoDataUrl ?? avatarDe(profile?.nombre)
 
   return (
     <div className="flex flex-col min-h-full">
-      <ScreenHeader title="Responder" onBack={() => navigate(`/app/foro/privada/${id}`)} />
+      <ScreenHeader title="Responder" onBack={() => navigate(`/app/foro/privada/${id}`, { state: { origen } })} />
       {/* Respuesta sobre papel (frame 54 del Figma) */}
       <div className="flex-1 px-5 pt-5 pb-8 flex flex-col" style={PAPEL}>
         <div className="flex items-start justify-between">
@@ -43,7 +45,7 @@ export function Responder() {
 
         <div className="mt-auto pt-8 flex justify-center">
           <button
-            onClick={() => navigate('/app/foro/enviada', { state: { destino } })}
+            onClick={() => navigate('/app/foro/enviada', { state: { destino, origen } })}
             className="rounded-full border-2 border-navy-900 bg-transparent text-navy-900
               px-10 py-2 text-lg font-semibold hover:bg-navy-900 hover:text-white transition">
             Enviar

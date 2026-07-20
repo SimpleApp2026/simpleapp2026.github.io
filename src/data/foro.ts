@@ -30,8 +30,20 @@ export const CARTAS_PRIVADAS: CartaPrivada[] = [
   {
     id: 'sergio',
     de: 'Sergio',
-    fecha: '03/06/2026',
+    fecha: '21/07/2026',
     texto: 'Hola Amiga, ¿cómo estás? Me acordé de vos mientras preparaba el desayuno. Quería saber cómo te sentías después de la gripe que tuviste. Está bravo el clima, hay que cuidarse mucho... Espero que ya estés recuperada. ¡Te mando un beso grande!',
+  },
+  {
+    id: 'norma',
+    de: 'Norma',
+    fecha: '20/07/2026',
+    texto: 'Ine, ¿cómo te va? Estuve organizando todo para la juntada del sábado. Ya hablé con las chicas y se suman casi todas. Vos traé esas tortas que te salen tan ricas y yo me encargo del mate y los bizcochos. ¡Va a estar hermoso!',
+  },
+  {
+    id: 'roberto',
+    de: 'Roberto',
+    fecha: '19/07/2026',
+    texto: 'Inés, ¿vamos a tomar un café hoy? Encontré una confitería nueva cerca de la plaza y tienen unas medialunas que no te podés perder. Avisame si podés a la tarde y paso a buscarte. Un abrazo grande.',
   },
 ]
 
