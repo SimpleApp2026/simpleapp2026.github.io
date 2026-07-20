@@ -47,6 +47,9 @@ function ImagenLugar({ lugar }: { lugar: Lugar }) {
 export function Mapa() {
   const navigate = useNavigate()
   const [sel, setSel] = useState<Lugar | null>(null)
+  const [inscripto, setInscripto] = useState(false)
+
+  const cerrar = () => { setSel(null); setInscripto(false) }
 
   return (
     <div className="flex flex-col h-full">
@@ -66,31 +69,45 @@ export function Mapa() {
               key={l.id}
               position={[l.lat, l.lng]}
               icon={PIN}
-              eventHandlers={{ click: () => setSel(l) }}
+              eventHandlers={{ click: () => { setSel(l); setInscripto(false) } }}
             />
           ))}
         </MapContainer>
 
-        {/* Tarjeta del lugar (frame 68 del Figma) */}
+        {/* Tarjeta del lugar (frame 68) y confirmación de inscripción */}
         {sel && (
           <div className="absolute inset-x-6 top-8 z-[1001]">
-            <div className="relative rounded-2xl bg-white shadow-xl p-4 flex flex-col gap-2 text-center">
-              <button
-                aria-label="Cerrar"
-                onClick={() => setSel(null)}
-                className="absolute top-2 right-3 text-2xl leading-none text-ink/50 hover:text-ink">
-                ×
-              </button>
-              <ImagenLugar lugar={sel} />
-              <h2 className="text-lg font-bold text-navy-900 leading-snug">{sel.nombre}</h2>
-              <p className="text-ink/85">{sel.evento}</p>
-              <p className="text-ink/55 text-sm">{sel.fecha}</p>
-              <button
-                onClick={() => navigate(sel.link)}
-                className="self-center rounded-full bg-navy-900 text-white px-8 py-1.5 text-sm font-semibold hover:bg-navy-800">
-                Quiero ir
-              </button>
-            </div>
+            {inscripto ? (
+              // "¡Felicidades! Ya te inscribiste" (tarjeta navy con Ok delineado)
+              <div className="rounded-2xl bg-navy-900 text-white shadow-xl px-6 py-9 flex flex-col gap-1 text-center">
+                <h2 className="text-lg">¡Felicidades!</h2>
+                <p className="text-lg font-bold">Ya te inscribiste</p>
+                <button
+                  onClick={cerrar}
+                  className="mt-5 self-center w-4/5 rounded-full border-2 border-white/70 text-white
+                    px-10 py-1.5 text-sm font-semibold hover:bg-white hover:text-navy-900 transition">
+                  Ok
+                </button>
+              </div>
+            ) : (
+              <div className="relative rounded-2xl bg-white shadow-xl p-4 flex flex-col gap-2 text-center">
+                <button
+                  aria-label="Cerrar"
+                  onClick={cerrar}
+                  className="absolute top-2 right-3 text-2xl leading-none text-ink/50 hover:text-ink">
+                  ×
+                </button>
+                <ImagenLugar lugar={sel} />
+                <h2 className="text-lg font-bold text-navy-900 leading-snug">{sel.nombre}</h2>
+                <p className="text-ink/85">{sel.evento}</p>
+                <p className="text-ink/55 text-sm">{sel.fecha}</p>
+                <button
+                  onClick={() => setInscripto(true)}
+                  className="self-center rounded-full bg-navy-900 text-white px-8 py-1.5 text-sm font-semibold hover:bg-navy-800">
+                  Quiero ir
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
