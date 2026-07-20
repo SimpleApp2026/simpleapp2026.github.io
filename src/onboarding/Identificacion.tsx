@@ -11,13 +11,21 @@ export function Identificacion() {
   return (
     <PhoneFrame>
       <div className="flex-1 bg-navy-900 text-white flex flex-col justify-center items-center gap-6 px-8 text-center">
-        {/* Avatar genérico gris (como el frame 02 del Figma) */}
-        <div aria-hidden="true" className="h-28 w-28 rounded-full bg-[#D3D7D8] overflow-hidden grid place-items-end mb-4">
-          <svg viewBox="0 0 24 24" className="h-24 w-24 text-[#8A9296]" fill="currentColor" aria-hidden="true">
-            <circle cx="12" cy="9" r="4.5" />
-            <path d="M12 15c-5 0-8 3-8 7h16c0-4-3-7-8-7z" />
-          </svg>
-        </div>
+        {/* Avatar genérico gris del frame 02 del Figma: ocupa la mitad del ancho
+            de la pantalla y la silueta va inscrita en el círculo (el arco de los
+            hombros se recorta contra el borde, como en el diseño). */}
+        <svg viewBox="0 0 24 24" className="w-52 max-w-[85%] aspect-square mb-4" aria-hidden="true">
+          <defs>
+            <clipPath id="avatar-recorte">
+              <circle cx="12" cy="12" r="12" />
+            </clipPath>
+          </defs>
+          <circle cx="12" cy="12" r="12" fill="#D3D7D8" />
+          <g fill="#8A9296" clipPath="url(#avatar-recorte)">
+            <circle cx="12" cy="9.6" r="3.5" />
+            <path d="M12 14.2c-4.1 0-6.6 2.7-6.6 6.2 0 2.4 2 3.6 6.6 3.6s6.6-1.2 6.6-3.6c0-3.5-2.5-6.2-6.6-6.2z" />
+          </g>
+        </svg>
         <Button variant="gray" onClick={identificarme}>Deseo identificarme</Button>
         <Button variant="gray" onClick={anonimo}>Sin identificarme</Button>
       </div>
