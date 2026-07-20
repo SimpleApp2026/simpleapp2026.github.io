@@ -7,10 +7,11 @@ import { CartasPrivadas } from './CartasPrivadas'
 import { CartaPrivada } from './CartaPrivada'
 import { Responder } from './Responder'
 import { TtsProvider } from '../../state/TtsProvider'
+import { UserProvider } from '../../state/UserProvider'
 
 function router(initial: string) {
   return render(
-    <TtsProvider><MemoryRouter initialEntries={[initial]}>
+    <UserProvider><TtsProvider><MemoryRouter initialEntries={[initial]}>
       <Routes>
         <Route path="/app/foro" element={<div>Foro</div>} />
         <Route path="/app/foro/escribir" element={<EscribirCarta />} />
@@ -19,7 +20,7 @@ function router(initial: string) {
         <Route path="/app/foro/privada/:id" element={<CartaPrivada />} />
         <Route path="/app/foro/privada/:id/responder" element={<Responder />} />
       </Routes>
-    </MemoryRouter></TtsProvider>,
+    </MemoryRouter></TtsProvider></UserProvider>,
   )
 }
 

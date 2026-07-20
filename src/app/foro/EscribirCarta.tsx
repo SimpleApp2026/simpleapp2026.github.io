@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
-import type { CSSProperties } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MicIcon, SpeakerIcon } from '../../ui/icons'
 import { useTts } from '../../state/hooks'
+import { PAPEL, Estampilla, TextoCarta } from './paper'
 
 // ---------------------------------------------------------------------------
 // Pantalla de escritura de carta (frames 40-42 del Figma "Tutorial Carta"):
@@ -10,61 +10,6 @@ import { useTts } from '../../state/hooks'
 // derecha, mic/altavoz, indicador 1/3 y secciones-guía con textareas
 // invisibles (solo placeholder + caret) sobre el papel.
 // ---------------------------------------------------------------------------
-
-// Papel: color crema con manchas suaves de acuarela (sin imágenes externas)
-const PAPEL: CSSProperties = {
-  backgroundColor: '#F6F0E3',
-  backgroundImage: [
-    'radial-gradient(ellipse 55% 38% at 18% 12%, rgba(213,196,166,0.30), transparent 62%)',
-    'radial-gradient(ellipse 48% 32% at 88% 28%, rgba(221,206,178,0.26), transparent 60%)',
-    'radial-gradient(ellipse 65% 42% at 38% 78%, rgba(209,190,158,0.24), transparent 65%)',
-    'radial-gradient(ellipse 38% 28% at 78% 92%, rgba(224,211,185,0.28), transparent 60%)',
-  ].join(', '),
-}
-
-// Estampilla postal (SVG inline: borde dentado navy, obelisco y "AR")
-function Estampilla() {
-  return (
-    <svg viewBox="0 0 56 68" className="h-16 w-auto drop-shadow-sm" aria-hidden="true">
-      <rect x="1" y="1" width="54" height="66" rx="4" fill="#FDFBF5" stroke="#16154C"
-        strokeWidth="2" strokeDasharray="4 3" />
-      <rect x="7" y="7" width="42" height="54" fill="none" stroke="#16154C" strokeWidth="1.2" />
-      <text x="42" y="16" fontSize="7" fontWeight="bold" fill="#16154C" textAnchor="middle">AR</text>
-      {/* Obelisco */}
-      <g stroke="#16154C" strokeWidth="1.6" fill="none" strokeLinejoin="round">
-        <path d="M28 14 L24.5 20 L24.5 48 L31.5 48 L31.5 20 Z" />
-        <line x1="18" y1="52" x2="38" y2="52" />
-        <line x1="21" y1="48" x2="35" y2="48" />
-      </g>
-    </svg>
-  )
-}
-
-// Textarea "invisible": sin borde ni fondo, crece con el contenido,
-// placeholder gris y caret navy titilante sobre el papel.
-function TextoCarta(
-  { value, onChange, placeholder, label, autoFocus = false, minRows = 3 }:
-  { value: string; onChange: (v: string) => void; placeholder: string; label: string; autoFocus?: boolean; minRows?: number },
-) {
-  const ref = useRef<HTMLTextAreaElement>(null)
-  useEffect(() => {
-    const el = ref.current
-    if (el) { el.style.height = 'auto'; el.style.height = `${el.scrollHeight}px` }
-  }, [value])
-  return (
-    <textarea
-      ref={ref}
-      aria-label={label}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      autoFocus={autoFocus}
-      rows={minRows}
-      className="w-full resize-none overflow-hidden bg-transparent border-0 outline-none
-        text-base leading-relaxed text-ink/85 placeholder:text-ink/40 caret-navy-900"
-    />
-  )
-}
 
 interface Seccion { titulo: string; placeholder: string; campo: number }
 
