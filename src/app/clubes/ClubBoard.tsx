@@ -21,18 +21,16 @@ function PublicacionClub({ post }: { post: Post }) {
     })
 
   return (
-    // La burbuja es más alta y la fila (avatar / comentarios / reacciones) se
-    // superpone sobre su borde inferior: todo se lee como una sola pieza, con
-    // la foto de perfil asomándose fuera de la burbuja (frame 60 del Figma).
-    <div className="relative">
-      <div className="ml-4 rounded-2xl bg-[#EDEDED] px-4 pt-3 pb-10 text-ink/85 leading-relaxed">
+    // La burbuja cubre de fondo a la pill de comentarios y a las reacciones
+    // (quedan enteras sobre el gris); el avatar va aparte, a caballo de la
+    // esquina inferior izquierda, asomándose fuera (frame 60 del Figma).
+    <div className="relative mb-4">
+      <div className="ml-4 rounded-2xl bg-[#EDEDED] px-4 pt-3 pb-12 text-ink/85 leading-relaxed">
         <span className="sr-only">{post.autor} escribió: </span>
         {post.texto}
       </div>
-      <div className="-mt-6 flex items-center gap-2 relative z-[1]">
-        {foto
-          ? <img src={foto} alt={post.autor} className="h-10 w-10 rounded-full object-cover shrink-0 ring-2 ring-white shadow" />
-          : <span className="h-10 w-10 rounded-full bg-chip/30 grid place-items-center shrink-0 ring-2 ring-white shadow" aria-label={post.autor}>👤</span>}
+      {/* Fila comentarios + reacciones: completamente sobre la burbuja */}
+      <div className="absolute left-14 bottom-2 flex items-center gap-2">
         <button className="rounded-full bg-teal px-4 py-1 text-sm font-medium text-navy-900 shadow-sm hover:bg-teal-dark">
           comentarios
         </button>
@@ -47,6 +45,10 @@ function PublicacionClub({ post }: { post: Post }) {
           ))}
         </div>
       </div>
+      {/* Avatar a caballo del borde inferior izquierdo de la burbuja */}
+      {foto
+        ? <img src={foto} alt={post.autor} className="absolute left-0 -bottom-4 h-10 w-10 rounded-full object-cover ring-2 ring-white shadow" />
+        : <span className="absolute left-0 -bottom-4 h-10 w-10 rounded-full bg-chip/30 grid place-items-center ring-2 ring-white shadow" aria-label={post.autor}>👤</span>}
     </div>
   )
 }
