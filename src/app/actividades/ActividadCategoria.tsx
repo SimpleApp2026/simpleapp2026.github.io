@@ -28,7 +28,8 @@ export function ActividadCategoria() {
       <div className="p-4 flex flex-col gap-5">
         {Object.entries(grupos).map(([grupo, items]) => (
           <section key={grupo} className="flex flex-col gap-3">
-            <span className="self-start rounded-full bg-teal/20 text-navy-900 px-3 py-1 text-sm font-semibold">{grupo}</span>
+            {/* Label del grupo más grande que los títulos de las cards (como en el Figma) */}
+            <span className="self-start rounded-full bg-teal/30 text-navy-900 px-4 py-1.5 text-xl font-bold">{grupo}</span>
             {items.map((a) => (
               <button key={a.id} className="text-left" onClick={() => navigate(`/app/actividades/${categoria.key}/${a.id}`)}>
                 <Card className="flex flex-col gap-1">

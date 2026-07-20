@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './layout/AppShell'
-import { Placeholder } from './screens/Placeholder'
 import { Home } from './app/Home'
 import { Perfil } from './app/Perfil'
 import { Configuracion } from './app/Configuracion'
@@ -22,6 +21,8 @@ import { Oportunidades } from './app/empleo/Oportunidades'
 import { Postular } from './app/empleo/Postular'
 import { PostulacionConfirmada } from './app/empleo/PostulacionConfirmada'
 import { Capacitaciones } from './app/empleo/Capacitaciones'
+import { CapacitacionDetalle } from './app/empleo/CapacitacionDetalle'
+import { CapacitacionConfirmada } from './app/empleo/CapacitacionConfirmada'
 import { ForoLayout } from './app/foro/ForoLayout'
 import { CartasPublicas } from './app/foro/CartasPublicas'
 import { CartasPrivadas } from './app/foro/CartasPrivadas'
@@ -36,7 +37,10 @@ import { DescuentoDetalle } from './app/descuentos/DescuentoDetalle'
 import { DescuentoConfirmado } from './app/descuentos/DescuentoConfirmado'
 import { ClubesList } from './app/clubes/ClubesList'
 import { ClubBoard } from './app/clubes/ClubBoard'
+import { ComentarClub } from './app/clubes/ComentarClub'
+import { ComentarioEnviado } from './app/clubes/ComentarioEnviado'
 import { ChatARIEL } from './app/asistente/ChatARIEL'
+import { Mapa } from './app/mapa/Mapa'
 import { LegalDoc } from './app/info/LegalDoc'
 import { Ayuda } from './app/info/Ayuda'
 
@@ -66,7 +70,7 @@ export function AppRoutes() {
         <Route path="foro/privada/:id" element={<CartaPrivada />} />
         <Route path="foro/privada/:id/responder" element={<Responder />} />
         <Route path="asistente" element={<ChatARIEL />} />
-        <Route path="mapa" element={<Placeholder title="Mapa" />} />
+        <Route path="mapa" element={<Mapa />} />
         <Route path="actividades">
           <Route index element={<ActividadesCategorias />} />
           <Route path="confirmada" element={<ActividadConfirmacion />} />
@@ -81,12 +85,16 @@ export function AppRoutes() {
           <Route path="oportunidades/:id" element={<Postular />} />
           <Route path="postulado" element={<PostulacionConfirmada />} />
           <Route path="capacitaciones" element={<Capacitaciones />} />
+          <Route path="capacitaciones/inscripto" element={<CapacitacionConfirmada />} />
+          <Route path="capacitaciones/:id" element={<CapacitacionDetalle />} />
         </Route>
         <Route path="descuentos" element={<DescuentosList />} />
         <Route path="descuentos/confirmado" element={<DescuentoConfirmado />} />
         <Route path="descuentos/:id" element={<DescuentoDetalle />} />
         <Route path="clubes" element={<ClubesList />} />
         <Route path="clubes/:id" element={<ClubBoard />} />
+        <Route path="clubes/:id/comentar" element={<ComentarClub />} />
+        <Route path="clubes/:id/comentario-enviado" element={<ComentarioEnviado />} />
         <Route path="ayuda" element={<Ayuda />} />
         <Route path="legal/:doc" element={<LegalDoc />} />
       </Route>

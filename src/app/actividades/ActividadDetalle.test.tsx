@@ -16,17 +16,19 @@ function setup(path: string) {
   )
 }
 
-test('salud activity shows ¡Quiero ir! and reserving confirms with the title', async () => {
+test('reserving confirms with the title, the reminder note and Ok', async () => {
   setup('/app/actividades/salud/salud-stretching')
   expect(screen.getByText('Clases de stretching en Comuna 2')).toBeInTheDocument()
   await userEvent.click(screen.getByRole('button', { name: /¡Quiero ir!/i }))
-  expect(screen.getByText(/¡Felicitaciones!/i)).toBeInTheDocument()
-  expect(screen.getByText(/Clases de stretching en Comuna 2/)).toBeInTheDocument()
+  expect(screen.getByText(/¡FELICITACIONES!/i)).toBeInTheDocument()
+  expect(screen.getByText(/Ya estás inscripto/i)).toBeInTheDocument()
+  expect(screen.getByText(/Ese mismo día te recordaremos la actividad/i)).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /^Ok$/ })).toBeInTheDocument()
 })
 
-test('non-salud activity shows Reservar', () => {
+test('every category uses the same ¡Quiero ir! call to action', () => {
   setup('/app/actividades/cine/cine-brandoni')
-  expect(screen.getByRole('button', { name: /^Reservar$/ })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: /¡Quiero ir!/i })).toBeInTheDocument()
 })
 
 test('unknown activity shows not found', () => {

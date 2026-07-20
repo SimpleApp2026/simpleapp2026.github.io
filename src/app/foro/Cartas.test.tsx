@@ -7,10 +7,11 @@ import { CartasPrivadas } from './CartasPrivadas'
 import { CartaPrivada } from './CartaPrivada'
 import { Responder } from './Responder'
 import { TtsProvider } from '../../state/TtsProvider'
+import { UserProvider } from '../../state/UserProvider'
 
 function router(initial: string) {
   return render(
-    <TtsProvider><MemoryRouter initialEntries={[initial]}>
+    <UserProvider><TtsProvider><MemoryRouter initialEntries={[initial]}>
       <Routes>
         <Route path="/app/foro" element={<div>Foro</div>} />
         <Route path="/app/foro/escribir" element={<EscribirCarta />} />
@@ -19,13 +20,26 @@ function router(initial: string) {
         <Route path="/app/foro/privada/:id" element={<CartaPrivada />} />
         <Route path="/app/foro/privada/:id/responder" element={<Responder />} />
       </Routes>
-    </MemoryRouter></TtsProvider>,
+    </MemoryRouter></TtsProvider></UserProvider>,
   )
 }
 
-test('composing a public letter confirms it was sent', async () => {
+test('composing a public letter walks the 3 guided steps and confirms it was sent', async () => {
   router('/app/foro/escribir')
-  await userEvent.type(screen.getByLabelText(/Escribí tu carta/i), 'Hola a todos')
+  // Paso 1/3: Presentate + Buscá puntos en común
+  expect(screen.getByText('1/3')).toBeInTheDocument()
+  await userEvent.type(screen.getByLabelText('Presentate'), 'Hola, soy Susana')
+  await userEvent.type(screen.getByLabelText('Buscá puntos en común'), 'Me gusta la jardinería')
+  await userEvent.click(screen.getByRole('button', { name: /Siguiente/i }))
+  // Paso 2/3: Hacé preguntas + Cerrá tu carta
+  expect(screen.getByText('2/3')).toBeInTheDocument()
+  await userEvent.type(screen.getByLabelText('Hacé preguntas'), '¿Qué les gusta hacer?')
+  await userEvent.click(screen.getByRole('button', { name: /Siguiente/i }))
+  // Paso 3/3: revisión con las partes unidas y editable
+  expect(screen.getByText('3/3')).toBeInTheDocument()
+  const revision = screen.getByLabelText('Revisá tu carta') as HTMLTextAreaElement
+  expect(revision.value).toContain('Hola, soy Susana')
+  expect(revision.value).toContain('¿Qué les gusta hacer?')
   await userEvent.click(screen.getByRole('button', { name: /Enviar/i }))
   expect(screen.getByText(/¡Felicitaciones!/i)).toBeInTheDocument()
   expect(screen.getByText(/foro público/i)).toBeInTheDocument()
@@ -39,4 +53,16 @@ test('opening and replying to a private letter confirms with the friend name', a
   await userEvent.type(screen.getByLabelText(/Escribí tu carta/i), 'Estoy mucho mejor, gracias')
   await userEvent.click(screen.getByRole('button', { name: /Enviar/i }))
   expect(screen.getByText(/Sergio/)).toBeInTheDocument()
+})
+
+test('the three-dots menu on a private letter shows the user options and Cancelar closes it', async () => {
+  router('/app/foro/privada/sergio')
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument()
+  await userEvent.click(screen.getByRole('button', { name: /Más opciones/i }))
+  expect(screen.getByRole('menu')).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Reportar usuario/i })).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Ocultar usuario/i })).toBeInTheDocument()
+  expect(screen.getByRole('menuitem', { name: /Ver perfil del usuario/i })).toBeInTheDocument()
+  await userEvent.click(screen.getByRole('menuitem', { name: /Cancelar/i }))
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument()
 })

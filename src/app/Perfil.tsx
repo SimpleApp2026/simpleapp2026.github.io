@@ -7,6 +7,7 @@ import { Chip } from '../ui/Chip'
 import { Button } from '../ui/Button'
 import { TextField } from '../ui/TextField'
 import { ageFromIso, formatLongDate } from '../lib/age'
+import { avatarDe } from '../data/avatars'
 
 export function Perfil() {
   const navigate = useNavigate()
@@ -38,8 +39,8 @@ export function Perfil() {
     <div>
       <ScreenHeader title="Perfil" />
       <div className="p-6 flex flex-col items-center gap-4">
-        {profile.fotoDataUrl
-          ? <img src={profile.fotoDataUrl} alt="Foto de perfil" className="h-32 w-32 rounded-full object-cover" />
+        {(profile.fotoDataUrl ?? avatarDe(profile.nombre))
+          ? <img src={profile.fotoDataUrl ?? avatarDe(profile.nombre)} alt="Foto de perfil" className="h-32 w-32 rounded-full object-cover" />
           : <div className="h-32 w-32 rounded-full bg-chip/20 grid place-items-center text-4xl" aria-hidden="true">👤</div>}
 
         {editing ? (

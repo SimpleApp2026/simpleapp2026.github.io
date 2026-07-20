@@ -1,5 +1,11 @@
 export type ChatFrom = 'ariel' | 'user'
-export interface ChatMsg { id: string; from: ChatFrom; texto: string }
+export interface ChatMsg { id: string; from: ChatFrom; texto: string; hora: string }
+
+/** Tarjetas de ayuda que el Figma muestra antes de empezar la conversación */
+export const SUGERENCIAS = [
+  { titulo: 'Ayuda con turnos médicos', detalle: 'Permití que ARIEL te ayude con tus turnos', pregunta: 'Necesito ayuda con un turno médico' },
+  { titulo: '¿Cómo inscribirme a una actividad?', detalle: 'Enterate cómo participar de las actividades que ofrece la ciudad', pregunta: '¿Qué actividades hay esta semana?' },
+]
 
 export function greeting(nombre?: string): string {
   const n = nombre?.trim()

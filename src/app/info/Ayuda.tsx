@@ -16,8 +16,8 @@ export function Ayuda() {
             <button aria-expanded={abierta === i}
               className="w-full text-left px-4 py-3 flex items-center justify-between gap-3"
               onClick={() => setAbierta((prev) => (prev === i ? null : i))}>
-              <span className="font-semibold">{f.pregunta}</span>
-              <span aria-hidden="true" className="text-2xl leading-none">{abierta === i ? '−' : '+'}</span>
+              <span className="font-semibold text-navy-900">{f.pregunta}</span>
+              <span aria-hidden="true" className="text-2xl leading-none text-navy-900">{abierta === i ? '−' : '+'}</span>
             </button>
             {abierta === i && <p className="px-4 pb-4 text-ink/80">{f.respuesta}</p>}
           </Card>
