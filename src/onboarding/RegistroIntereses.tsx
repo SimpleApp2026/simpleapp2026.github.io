@@ -6,6 +6,7 @@ import { Chip } from '../ui/Chip'
 import { Button } from '../ui/Button'
 import { useUser } from '../state/hooks'
 import type { Interest } from '../types'
+import arielImg from '../assets/img/ariel.png'
 
 const OPCIONES: { key: Interest; emoji: string }[] = [
   { key: 'Gastronomía', emoji: '🍽️' },
@@ -28,7 +29,13 @@ export function RegistroIntereses() {
     <OnboardingScreen>
       <ScreenHeader title="Intereses" onBack={() => navigate('/registro/datos')} />
       <div className="p-6 flex flex-col gap-4">
-        <p className="text-base text-ink/70">¡Queremos conocerte más!</p>
+        {/* ARIEL con globo de diálogo (frame 04 del Figma) */}
+        <div className="flex items-center gap-3">
+          <img src={arielImg} alt="" className="h-14 w-14 object-contain shrink-0" aria-hidden="true" />
+          <p className="rounded-full bg-navy-900 text-white px-5 py-2 text-base font-medium">
+            ¡Queremos conocerte más!
+          </p>
+        </div>
         <h2 className="text-2xl font-semibold">¿Qué temas te interesan?</h2>
         <div className="flex flex-col gap-3 my-4">
           {OPCIONES.map(({ key, emoji }) => (

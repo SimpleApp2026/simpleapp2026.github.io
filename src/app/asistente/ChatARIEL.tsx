@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useUser, useTts } from '../../state/hooks'
 import { Chip } from '../../ui/Chip'
-import { MicIcon, SpeakerIcon, SendIcon } from '../../ui/icons'
+import { MicIcon, SpeakerIcon, SendIcon, CameraIcon, ImageIcon, FolderIcon, HeadphonesIcon } from '../../ui/icons'
 import { greeting, arielRespond, QUICK_REPLIES, type ChatMsg } from '../../data/ariel'
 import arielImg from '../../assets/img/ariel.png'
 
@@ -46,7 +46,9 @@ export function ChatARIEL() {
             {m.from === 'ariel' && (
               <img src={arielImg} alt="" className="h-8 w-8 shrink-0 object-contain" aria-hidden="true" />
             )}
-            <div className={`rounded-2xl px-4 py-2 text-base ${m.from === 'user' ? 'bg-navy-800 text-white' : 'bg-surface text-ink border border-chip/20'}`}>
+            {/* Burbujas como en el Figma: ARIEL en azul de la app con letras blancas;
+                usuario en gris claro con letras azules */}
+            <div className={`rounded-2xl px-4 py-2 text-base ${m.from === 'user' ? 'bg-[#E4E7E8] text-navy-800' : 'bg-navy-900 text-white'}`}>
               {m.texto}
             </div>
           </div>
@@ -59,14 +61,33 @@ export function ChatARIEL() {
         ))}
       </div>
 
-      <form className="p-3 flex items-center gap-2 border-t border-chip/20"
+      {/* Barra de entrada como en el Figma: cámara / imagen / archivo + input con
+          mic y enviar + auriculares (decorativos, sin funcionalidad) sobre fondo mint */}
+      <form className="px-2 py-2 flex items-center gap-1.5 bg-teal/40"
         onSubmit={(e) => { e.preventDefault(); enviar(texto) }}>
-        <input value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Escribí acá..."
-          aria-label="Escribí un mensaje para ARIEL"
-          className="flex-1 rounded-full border border-chip/40 px-4 py-2 text-base" />
-        <button type="submit" aria-label="Enviar"
-          className="h-11 w-11 grid place-items-center rounded-full bg-primary text-white">
-          <SendIcon className="h-5 w-5" />
+        <button type="button" aria-label="Sacar foto" className="p-1 text-navy-800 shrink-0">
+          <CameraIcon className="h-6 w-6" />
+        </button>
+        <button type="button" aria-label="Subir imagen" className="p-1 text-navy-800 shrink-0">
+          <ImageIcon className="h-6 w-6" />
+        </button>
+        <button type="button" aria-label="Subir archivo" className="p-1 text-navy-800 shrink-0">
+          <FolderIcon className="h-6 w-6" />
+        </button>
+        <div className="min-w-0 flex-1 flex items-center gap-1 rounded-full bg-surface border border-chip/30 pl-3 pr-1 py-1">
+          <input value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Escribí acá..."
+            aria-label="Escribí un mensaje para ARIEL"
+            className="min-w-0 flex-1 bg-transparent text-base outline-none" />
+          <button type="button" aria-label="Grabar audio" className="p-1 text-navy-800">
+            <MicIcon className="h-5 w-5" />
+          </button>
+          <button type="submit" aria-label="Enviar"
+            className="h-9 w-9 grid place-items-center rounded-full bg-primary text-white shrink-0">
+            <SendIcon className="h-4 w-4" />
+          </button>
+        </div>
+        <button type="button" aria-label="Escuchar con auriculares" className="p-1.5 text-navy-800">
+          <HeadphonesIcon className="h-6 w-6" />
         </button>
       </form>
     </div>

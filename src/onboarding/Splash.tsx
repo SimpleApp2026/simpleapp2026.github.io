@@ -16,7 +16,13 @@ export function Splash() {
           alt="Mapa ilustrado de los barrios de Buenos Aires"
           className="my-2 w-full max-w-[320px] rounded-2xl"
         />
-        <p className="text-base text-ink/60">Ciudad de Buenos Aires</p>
+        {/* Logo BA Buenos Aires Ciudad (pie del frame 01 del Figma) */}
+        <div className="mt-2 flex items-center gap-2 text-ink" aria-label="Buenos Aires Ciudad">
+          <span className="text-3xl font-black tracking-tight leading-none">BA</span>
+          <span className="text-left text-xs font-semibold leading-tight">
+            Buenos Aires<br />Ciudad
+          </span>
+        </div>
         <div className="mt-auto w-full">
           <Button onClick={() => navigate('/identificacion')}>Comenzar</Button>
         </div>
