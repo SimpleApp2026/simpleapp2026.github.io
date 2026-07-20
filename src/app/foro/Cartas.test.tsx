@@ -23,9 +23,22 @@ function router(initial: string) {
   )
 }
 
-test('composing a public letter confirms it was sent', async () => {
+test('composing a public letter walks the 3 guided steps and confirms it was sent', async () => {
   router('/app/foro/escribir')
-  await userEvent.type(screen.getByLabelText(/Escribí tu carta/i), 'Hola a todos')
+  // Paso 1/3: Presentate + Buscá puntos en común
+  expect(screen.getByText('1/3')).toBeInTheDocument()
+  await userEvent.type(screen.getByLabelText('Presentate'), 'Hola, soy Susana')
+  await userEvent.type(screen.getByLabelText('Buscá puntos en común'), 'Me gusta la jardinería')
+  await userEvent.click(screen.getByRole('button', { name: /Siguiente/i }))
+  // Paso 2/3: Hacé preguntas + Cerrá tu carta
+  expect(screen.getByText('2/3')).toBeInTheDocument()
+  await userEvent.type(screen.getByLabelText('Hacé preguntas'), '¿Qué les gusta hacer?')
+  await userEvent.click(screen.getByRole('button', { name: /Siguiente/i }))
+  // Paso 3/3: revisión con las partes unidas y editable
+  expect(screen.getByText('3/3')).toBeInTheDocument()
+  const revision = screen.getByLabelText('Revisá tu carta') as HTMLTextAreaElement
+  expect(revision.value).toContain('Hola, soy Susana')
+  expect(revision.value).toContain('¿Qué les gusta hacer?')
   await userEvent.click(screen.getByRole('button', { name: /Enviar/i }))
   expect(screen.getByText(/¡Felicitaciones!/i)).toBeInTheDocument()
   expect(screen.getByText(/foro público/i)).toBeInTheDocument()
