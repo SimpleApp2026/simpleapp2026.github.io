@@ -4,6 +4,7 @@ import { UserProvider } from './state/UserProvider'
 import { AccessibilityProvider } from './state/AccessibilityProvider'
 import { TtsProvider } from './state/TtsProvider'
 import { AppRoutes } from './routes'
+import { AvisoActualizacion } from './pwa/ActualizarApp'
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <AppProviders>
       <HashRouter><AppRoutes /></HashRouter>
+      <AvisoActualizacion />
     </AppProviders>
   )
 }

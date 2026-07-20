@@ -1,0 +1,19 @@
+{
+  "name": "+Simple",
+  "short_name": "+Simple",
+  "description": "Comunidad, actividades, empleo y beneficios para adultos mayores de la Ciudad de Buenos Aires.",
+  "lang": "es-AR",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFFFFF",
+  "theme_color": "#16154C",
+  "categories": ["social", "lifestyle"],
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

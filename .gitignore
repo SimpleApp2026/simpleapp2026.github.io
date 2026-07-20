@@ -6,3 +6,4 @@ dist/
 /tailwind.config.js
 /tailwind.config.d.ts
 .superpowers/
+.vscode/
