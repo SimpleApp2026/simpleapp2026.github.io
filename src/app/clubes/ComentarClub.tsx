@@ -34,7 +34,7 @@ export function ComentarClub() {
     // Guarda la foto del usuario logueado junto con el post (fotoDataUrl
     // subida en el registro, o su foto del set del Figma si aplica)
     agregarPostClub(club.id, nombre, texto.trim(), foto)
-    volver()
+    navigate(`/app/clubes/${club.id}/comentario-enviado`)
   }
 
   return (

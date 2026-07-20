@@ -39,6 +39,7 @@ import { DescuentoConfirmado } from './app/descuentos/DescuentoConfirmado'
 import { ClubesList } from './app/clubes/ClubesList'
 import { ClubBoard } from './app/clubes/ClubBoard'
 import { ComentarClub } from './app/clubes/ComentarClub'
+import { ComentarioEnviado } from './app/clubes/ComentarioEnviado'
 import { ChatARIEL } from './app/asistente/ChatARIEL'
 import { LegalDoc } from './app/info/LegalDoc'
 import { Ayuda } from './app/info/Ayuda'
@@ -93,6 +94,7 @@ export function AppRoutes() {
         <Route path="clubes" element={<ClubesList />} />
         <Route path="clubes/:id" element={<ClubBoard />} />
         <Route path="clubes/:id/comentar" element={<ComentarClub />} />
+        <Route path="clubes/:id/comentario-enviado" element={<ComentarioEnviado />} />
         <Route path="ayuda" element={<Ayuda />} />
         <Route path="legal/:doc" element={<LegalDoc />} />
       </Route>

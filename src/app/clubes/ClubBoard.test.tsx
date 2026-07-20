@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { ClubBoard } from './ClubBoard'
 import { ComentarClub } from './ComentarClub'
+import { ComentarioEnviado } from './ComentarioEnviado'
 import { TtsProvider } from '../../state/TtsProvider'
 import { UserProvider } from '../../state/UserProvider'
 import { limpiarPostsAgregados } from '../../data/clubes'
@@ -13,6 +14,7 @@ function setup(path: string) {
       <Routes>
         <Route path="/app/clubes/:id" element={<ClubBoard />} />
         <Route path="/app/clubes/:id/comentar" element={<ComentarClub />} />
+        <Route path="/app/clubes/:id/comentario-enviado" element={<ComentarioEnviado />} />
         <Route path="/app/clubes" element={<div>Clubes</div>} />
       </Routes>
     </MemoryRouter></TtsProvider></UserProvider>,
@@ -34,6 +36,10 @@ test('COMENTAR EN EL CLUB opens the compose screen and the new post joins the bo
   expect(screen.getByText(/vía mensaje de voz/i)).toBeInTheDocument()
   await userEvent.type(screen.getByLabelText('Escribí tu comentario'), 'Estoy leyendo poesía')
   await userEvent.click(screen.getByRole('button', { name: /^Enviar$/ }))
+  // confirmación de los frames 64-66 del Figma
+  expect(screen.getByText(/¡Felicidades!/i)).toBeInTheDocument()
+  expect(screen.getByText(/Enviaste tu comentario al club/i)).toBeInTheDocument()
+  await userEvent.click(screen.getByRole('button', { name: /^Ok$/ }))
   // de vuelta en el board, el comentario aparece en la lista del club
   expect(screen.getByRole('heading', { name: /Club de Lectura/i })).toBeInTheDocument()
   expect(screen.getByText('Estoy leyendo poesía')).toBeInTheDocument()
@@ -80,6 +86,7 @@ test('a new post and thread comment use the logged-in user uploaded photo', asyn
   await userEvent.click(screen.getByRole('button', { name: /COMENTAR EN EL CLUB/i }))
   await userEvent.type(screen.getByLabelText('Escribí tu comentario'), 'Hola desde mi cuenta')
   await userEvent.click(screen.getByRole('button', { name: /^Enviar$/ }))
+  await userEvent.click(screen.getByRole('button', { name: /^Ok$/ }))
   const burbuja = screen.getByText('Hola desde mi cuenta')
   expect(screen.getByAltText('Manuel')).toHaveAttribute('src', miFoto)
   expect(burbuja).toBeInTheDocument()
