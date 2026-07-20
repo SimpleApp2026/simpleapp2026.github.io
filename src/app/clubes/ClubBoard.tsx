@@ -84,8 +84,8 @@ export function ClubBoard() {
         {/* Botón "+ COMENTAR EN EL CLUB" (frame 60 del Figma) */}
         <button
           onClick={() => setComponiendo(true)}
-          className="self-center flex items-center gap-2 rounded-full bg-white border border-chip/25 shadow-sm
-            px-5 py-2 text-sm font-bold tracking-wide text-navy-900 hover:bg-bg">
+          className="self-center flex items-center gap-2.5 rounded-full bg-white border border-chip/25 shadow-sm
+            px-9 py-3.5 text-sm font-bold tracking-wide text-navy-900 hover:bg-bg">
           <span className="grid place-items-center h-5 w-5 rounded-full bg-teal text-navy-900 text-sm leading-none" aria-hidden="true">+</span>
           COMENTAR EN EL CLUB
         </button>
