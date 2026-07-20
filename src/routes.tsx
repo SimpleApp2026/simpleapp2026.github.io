@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AppShell } from './layout/AppShell'
-import { Placeholder } from './screens/Placeholder'
 import { Home } from './app/Home'
 import { Perfil } from './app/Perfil'
 import { Configuracion } from './app/Configuracion'
@@ -41,6 +40,7 @@ import { ClubBoard } from './app/clubes/ClubBoard'
 import { ComentarClub } from './app/clubes/ComentarClub'
 import { ComentarioEnviado } from './app/clubes/ComentarioEnviado'
 import { ChatARIEL } from './app/asistente/ChatARIEL'
+import { Mapa } from './app/mapa/Mapa'
 import { LegalDoc } from './app/info/LegalDoc'
 import { Ayuda } from './app/info/Ayuda'
 
@@ -70,7 +70,7 @@ export function AppRoutes() {
         <Route path="foro/privada/:id" element={<CartaPrivada />} />
         <Route path="foro/privada/:id/responder" element={<Responder />} />
         <Route path="asistente" element={<ChatARIEL />} />
-        <Route path="mapa" element={<Placeholder title="Mapa" />} />
+        <Route path="mapa" element={<Mapa />} />
         <Route path="actividades">
           <Route index element={<ActividadesCategorias />} />
           <Route path="confirmada" element={<ActividadConfirmacion />} />
