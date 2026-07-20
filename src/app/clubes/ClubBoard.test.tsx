@@ -26,6 +26,20 @@ test('shows club posts as bubbles and can publish a new one', async () => {
   expect(screen.getByText('Estoy leyendo poesía')).toBeInTheDocument()
 })
 
+test('the comentarios button opens the Figma thread and allows adding a comment', async () => {
+  setup('/app/clubes/musica')
+  // hilo del post del Teatro Colón (tercer post) con los comentarios del Figma
+  await userEvent.click(screen.getAllByRole('button', { name: /^comentarios$/i })[2])
+  expect(screen.getByText(/2 comentarios/)).toBeInTheDocument()
+  expect(screen.getByText('¡Yo voy con mi hermana!')).toBeInTheDocument()
+  expect(screen.getByText('Yo iré con un viejo amigo que vino de visita')).toBeInTheDocument()
+  // escribir un comentario propio con el input "comentar acá"
+  await userEvent.type(screen.getByLabelText(/Comentá acá/i), 'Yo también voy, ¡nos vemos ahí!')
+  await userEvent.keyboard('{Enter}')
+  expect(screen.getByText('Yo también voy, ¡nos vemos ahí!')).toBeInTheDocument()
+  expect(screen.getByText(/3 comentarios/)).toBeInTheDocument()
+})
+
 test('each post has a reactions bar and toggling an emoji marks it selected', async () => {
   setup('/app/clubes/lectura')
   const corazones = screen.getAllByRole('button', { name: /Reaccionar con ❤️/i })
